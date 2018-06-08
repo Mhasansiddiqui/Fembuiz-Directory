@@ -1,0 +1,266 @@
+
+
+a#boxbut {
+    margin-left: 43%;
+}
+
+p.text-below {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+
+.um-field-user_email{
+display:none;}
+
+input.wpcf7-form-control.wpcf7-text.wpcf7-validates-as-required, input.wpcf7-form-control.wpcf7-text, textarea.wpcf7-form-control.wpcf7-textarea {
+    border-radius: 30px;
+}
+
+.slide-text{
+    text-align: center;
+    text-shadow: 1px 1px #000000;
+    color: #ffffff;
+    font-weight: bold;
+font-size:1.5em;
+}
+
+
+div#fancybox-content {
+    background: #e6e6e6;
+    padding: 20px;
+}
+
+a.slide-but{
+background: #ee3a8f;
+    padding: 5px 5px  !important;
+    color: #ffffff;
+    border: 1px solid #ee3a8f;
+    border-radius: 2px;
+color:#ffffff;
+}
+
+a.slide-but:hover{
+color:#ffffff !important;
+
+}
+
+
+.um-field-label {
+    clear: both;
+}
+
+.form-para{
+font-size:11px;}
+
+
+.pink {
+    height: 50px;
+    background: #ec008c;
+    color: #ffffff;
+    line-height: 50px;
+    padding-left: 20px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+p a {
+    color: #ee3a8f;
+}
+
+
+
+
+ .um-cover ,.um-member-cover {
+  /*  background: url("https://www.fembuiz.com.au/wp-content/uploads/2017/08/Fembuiz-Directory-Banner.jpg");*/
+    background-size: contain;
+background:#000000 !important;
+}
+
+
+
+
+
+
+.footer_bottom ul li {
+    display: grid;
+    margin-right: 0px;
+    text-align: left;
+    font-size: 20px;
+text-align: center;
+
+}
+
+
+
+
+
+
+strong.widgetheading {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+
+
+table#pmpro_levels_table {
+    width: 100%;
+    border: 1px solid #cacaca;
+}
+
+
+.pmpro_btn, .pmpro_btn:link, .pmpro_content_message a, .pmpro_content_message a:link {
+    background-color: #ec008c;
+    background-image: none;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.pmpro_checkout tr.active td {
+    background: #ec008c;
+    color: #ffffff;
+}
+
+.nav-previous.alignleft {
+    margin-top: 20px;
+}
+
+.pmpro_btn:hover, .pmpro_btn:focus, .pmpro_checkout .pmpro_btn:hover, .pmpro_checkout .pmpro_btn:focus{
+    background-color: #FAFAFA;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #ec008c;
+    border: 2px solid #ec008c;
+}
+
+.pmpro-confirmation .alignright a{display:none;}
+
+.um-field.um-field-divider.um-field-um_divider_5631_27.um-field-divider.um-field-type_divider {
+    display: none;
+}
+
+.um-header {
+padding:0px;
+border:none;}
+
+
+.wpb_wrapper p {
+    padding: 10px;
+}
+
+.um-form {
+    padding: 5px;
+}
+
+.qbutton.big_large, .qbutton.big_large_full_width {
+    padding: 0 0px;
+}
+
+
+
+.footer_bottom ul {
+    list-style: none;
+    text-align: center;
+    padding-left: 15px;
+}
+
+header .q_logo img.mobile {
+    width: 80% !important;
+    height: 80% !important;
+
+}
+
+
+
+    .pmpro-checkout{
+      width: 100%;
+    }
+    .pmpro-checkout form{
+    
+      border: 1px solid #cc9;
+      padding: 10px;
+      font-family: verdana;
+      width: 75%;
+      font-size: 1em;
+    }
+    .fieldWrapper{
+      margin: 2px 0 2px 0;
+      padding: 0;
+    }
+    .pmpro-checkout label{
+      float: left;
+      text-align: right;
+      margin: 0 5px 0 0;
+      width: 30%;
+    }
+    .pmpro-checkout input{
+      width: 200px;
+      border: 1px solid #cc9;
+    }
+    .confirmMessage{
+      margin: 0;
+      padding: 0;
+      font-size: .8em;
+    }
+
+
+
+
+
+
+
+
+
+@media only screen and (min-device-width: 1366px){
+
+.um-profile-body.main.main-default {
+    max-width: 80% !important;
+    float: left;
+}
+
+.um-profile-nav-item a {
+    color: #000000 !important;
+    font-size: 14px!important;
+    height: 36px !important;
+    font-weight: 600 !important;
+    padding: 0px 5px 1px 40px !important;
+    border-radius: 1px !important;
+    margin-left: -10px !important;
+    position: relative !important;
+    border-bottom: 0!important;
+    line-height: 36px !important;
+}
+
+
+.um-profile-nav-item a {
+    color: #fff!important;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 10px 6px 28px;
+    display: block;
+    float: left;
+    border-radius: 4px;
+    margin-left: 5px;
+    position: relative;
+    border-bottom: 0!important;
+    background: #222222;
+  width: 83% !important;
+    margin-top: 15px !important;
+}
+
+.page-id-5633 .um-5631.um .um-profile-body {
+    width: 100%;
+    float: left;}
+
+
+.um-profile-nav{
+background: none !important; }
+
+.um-profile-nav {
+float:right;
+width:150px
+}
+
+}

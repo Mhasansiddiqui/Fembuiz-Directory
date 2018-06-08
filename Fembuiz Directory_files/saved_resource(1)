@@ -1,0 +1,71 @@
+.page-id-5473 .featured-img-header {padding: 250px 0 100px;position: relative;-webkit-background-size: cover !important;-moz-background-size: cover !important;-o-background-size: cover !important;background-size: cover !important;display: none;}
+.page-id-5473 .site-logo { display: none!important; }
+
+.um-form textarea {
+    width: 600px;
+    padding: 8px 12px !important;
+    display: block;
+    font-size: 15px !important;
+    line-height: 22px !important;
+    background: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    min-height: 80px !important;
+    box-shadow: none;
+    outline: 0 !important;
+}
+
+.slide-content span h2 {
+    font-weight: 400px;
+    font-size: 62px;
+    line-height: 64px;
+    color: #fff;
+    margin-bottom: 18px;
+  padding-top: 1px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.slide-content span p {
+    color: pink;
+  font-size: 35px;
+margin-bottom: 35px;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.entry-header {
+    background: #000;
+    padding: 40px 0 40px;
+}
+.site-header-secondary {
+    padding-top: 30px;
+}
+/*--------------------------------------------------------------
+5.1 Links
+--------------------------------------------------------------*/
+a {
+	color: #ff69b4;
+}
+
+a:hover {
+	color: #ea474b;
+}
+
+		#site-navigation button:hover { background: none; }
+		
+				
+				.nav-previous, .paging-navigation .nav-previous, .post-navigation .nav-previous, .nav-next, .paging-navigation .nav-next, .post-navigation .nav-next { background: #ffffff; }
+		 
+		
+				
+				.site-header .main-navigation ul li a { color: #ff69b4; }
+
+.nav-previous, .paging-navigation .nav-previous, .post-navigation .nav-previous, .nav-next, .paging-navigation .nav-next, .post-navigation .nav-next {
+    background: #fff!important;
+}
+
+.um-field-c .um-field-checkbox {
+    margin: 0 !important;
+    position: relative;
+    top: -px;
+}

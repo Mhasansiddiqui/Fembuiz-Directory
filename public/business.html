@@ -3,52 +3,52 @@
         <div class="container">
             <div class="container_inner default_template_holder clearfix page_container_inner">
                 <div id="pmpro_level-2">
-                        <style>
-                                        .p-text-wrap {
-                                            margin: 0;
-                                            padding: 0 !important;
-                                            text-overflow: ellipsis;
-                                            overflow: hidden;
-                                        }
+                    <style>
+                        .p-text-wrap {
+                            margin: 0;
+                            padding: 0 !important;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                        }
 
-                                        .user-choice {
-                                            margin: 10px;
-                                            text-align: end;
-                                        }
+                        .user-choice {
+                            margin: 10px;
+                            text-align: end;
+                        }
 
-                                        .user-choice button {
-                                            height: 30px;
-                                            background-color: cadetblue;
-                                            border-color: rgb(42, 147, 153)
-                                        }
+                        .user-choice button {
+                            height: 30px;
+                            background-color: cadetblue;
+                            border-color: rgb(42, 147, 153)
+                        }
 
-                                        .user-choice button:focus {
-                                            background-color: rgb(51, 187, 51);
-                                            border-color: rgb(40, 143, 40)
-                                        }
+                        .user-choice button:focus {
+                            background-color: rgb(51, 187, 51);
+                            border-color: rgb(40, 143, 40)
+                        }
 
-                                        .inline-row {
-                                            display: inline-flex
-                                        }
+                        .inline-row {
+                            display: inline-flex
+                        }
 
-                                        .search-row {
+                        .search-row {
 
-                                            width: 140px;
-                                            height: 200px;
-                                            background-color: aliceblue;
-                                            text-align: center;
-                                        }
+                            width: 140px;
+                            height: 200px;
+                            background-color: aliceblue;
+                            text-align: center;
+                        }
 
-                                        .css-image {
-                                            height: 80px;
-                                            width: 80px;
-                                            border-radius: 50%
-                                        }
+                        .css-image {
+                            height: 80px;
+                            width: 80px;
+                            border-radius: 50%
+                        }
 
-                                        .checked {
-                                            color: orange;
-                                        }
-                                    </style>
+                        .checked {
+                            color: orange;
+                        }
+                    </style>
 
 
                     <form style="margin:10px 10px 10px 10px;border:solid 2px rgb(230, 172, 182);padding:10px 10px 10px 10px" id="pmpro_form"
@@ -85,8 +85,26 @@
                                 <!-- end pmpro_checkout-field-username -->
 
 
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bconfirmemail">
+                                    <label for="bconfirmemail">Job Descrtion</label>
+                                    <textarea id="bconfirmemail" name="bconfirmemail" type="text" class="input pmpro_required" size="30" value=""></textarea>
+
+                                </div>
+
                                 <div class="pmpro_checkout-field pmpro_checkout-field-password">
                                     <label for="password">State/Province</label>
+                                    <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value=""
+                                    />
+                                </div>
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-password">
+                                    <label for="password">Duration</label>
+                                    <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value=""
+                                    />
+                                </div>
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-password">
+                                    <label for="password">Budget</label>
                                     <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value=""
                                     />
                                 </div>
@@ -111,11 +129,7 @@
                                 </div>
 
 
-                                <div class="pmpro_checkout-field pmpro_checkout-field-bconfirmemail">
-                                    <label for="bconfirmemail">Job Descrtion</label>
-                                    <textarea id="bconfirmemail" name="bconfirmemail" type="text" class="input pmpro_required" size="30" value="" ></textarea>
 
-                                </div>
 
                                 <!-- end pmpro_checkout-field-bconfirmemail -->
 
@@ -168,52 +182,52 @@
 
 
                         <div>
-                                <label for="">
-                                    Job Posted
-                                </label>
-                                <hr />
+                            <label for="">
+                                Job Posted
+                            </label>
+                            <hr />
 
-                                <div class="inline-row">
+                            <div class="inline-row">
 
-                                    <div class="search-row">
-                                        <div class="card">
-                                            <img class="css-image" src="images/cover1.jpg" alt="John">
-                                            <h4>John Doe</h4>
-                                            <span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </span>
-                                            <p>
-                                                <button class="card-button">Completed</button>
-                                            </p>
-                                        </div>
+                                <div class="search-row">
+                                    <div class="card">
+                                        <img class="css-image" src="images/cover1.jpg" alt="John">
+                                        <h4>John Doe</h4>
+                                        <span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </span>
+                                        <p>
+                                            <button class="card-button">Completed</button>
+                                        </p>
                                     </div>
-
-                                    <div class="search-row">
-                                        <div class="card">
-                                            <img class="css-image" src="images/cover1.jpg" alt="John">
-                                            <h4>John Doe</h4>
-                                            <span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </span>
-                                            <p>
-                                                <button class="card-button">Completed</button>
-                                            </p>
-                                        </div>
-                                    </div>
-
                                 </div>
 
-                                <hr />
+                                <div class="search-row">
+                                    <div class="card">
+                                        <img class="css-image" src="images/cover1.jpg" alt="John">
+                                        <h4>John Doe</h4>
+                                        <span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </span>
+                                        <p>
+                                            <button class="card-button">Completed</button>
+                                        </p>
+                                    </div>
+                                </div>
 
                             </div>
+
+                            <hr />
+
+                        </div>
                         <!-- end pmpro_user_fields -->
                     </form>
                 </div>

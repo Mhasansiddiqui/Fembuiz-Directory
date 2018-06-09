@@ -140,7 +140,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
                         if (response.data.user) {
                             localStorage.setItem('user', JSON.stringify(response.data.user));
                             $rootScope.isLogin = true;
-
+                            $state.go('search')
                         }
                         else {
                             toaster.pop({

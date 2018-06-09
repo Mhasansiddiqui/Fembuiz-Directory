@@ -5,6 +5,11 @@ import bodyParser = require('body-parser')
 import { connectionToDb } from './database/connection';
 connectionToDb();
 
+
+import { user } from './route/user/userRoute'
+import { auth } from './route/auth/auth'
+
+
 import request = require('request');
 
 var path = require('path');
@@ -12,7 +17,7 @@ var path = require('path');
 var app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ 'extended': 'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 // app.use(methodOverride());
@@ -25,9 +30,17 @@ app.use(function (req, res, next) {
 });
 
 
+
+
 app.use(express.static(__dirname + '/public'));
 
+app.use('/api', user);
+app.use('/auth', auth);
 
+app.post('/signup' , (req: express.Request, res: express.Response) => {
+    console.log('received',req.body)
+      res.send('ok')
+})
 
 
 

@@ -4,6 +4,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var connection_1 = require("./database/connection");
 connection_1.connectionToDb();
+var userRoute_1 = require("./route/user/userRoute");
+var auth_1 = require("./route/auth/auth");
 var path = require('path');
 var app = express();
 app.use(bodyParser.json());
@@ -19,6 +21,12 @@ app.use(function (req, res, next) {
     next();
 });
 app.use(express.static(__dirname + '/public'));
+app.use('/api', userRoute_1.user);
+app.use('/auth', auth_1.auth);
+app.post('/signup', function (req, res) {
+    console.log('received', req.body);
+    res.send('ok');
+});
 app.listen(process.env.PORT || 3000, function () {
     console.log('server start');
 });

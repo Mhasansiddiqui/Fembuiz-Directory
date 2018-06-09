@@ -1,0 +1,117 @@
+<div class="content content_top_margin" style="display:block;margin:auto">
+    <div class="content_inner  ">
+        <div class="container">
+            <div class=" default_template_holder clearfix page_container_inner">
+                <div id="pmpro_level-2" style="width: 570px;
+                    margin: auto;">
+                    <form style="border:solid 2px rgb(230, 172, 182);text-align:center;margin:30px" id="pmpro_form" class="pmpro_form" action=""
+                        method="post">
+
+                        <input type="hidden" id="level" name="level" value="2" />
+                        <input type="hidden" id="checkjavascript" name="checkjavascript" value="1" />
+
+                        <div id="pmpro_message" class="pmpro_message" style="display: none;"></div>
+
+                        <div id="pmpro_pricing_fields" class="pmpro_checkout">
+
+                            <div class="pmpro_checkout-fields">
+                            </div>
+                            <!-- end pmpro_checkout-fields -->
+                        </div>
+                        <!-- end pmpro_pricing_fields -->
+
+
+                        <div id="pmpro_user_fields" class="pmpro_checkout">
+
+                            <div class="pmpro_checkout-fields">
+
+
+
+                                <label ng-if="isLoading">
+                                    <div class="loader">Loading...</div>
+                                </label>
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <label for="bemail">E-mail Address</label>
+                                    <input ng-model="email" id="bemail" name="bemail" type="email" class="input pmpro_required" size="30" value="" />
+                                </div>
+
+
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-password">
+                                    <label for="password">Password</label>
+                                    <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value="" />
+                                </div>
+
+                            </div>
+                            <style>
+
+                                .pmpro_checkout-fields div{
+                                    margin:auto !important;
+                                }
+                                .loader-spin{
+                                    text-align: center !important;
+                                }
+
+                                label {
+                                    text-align: center !important
+                                }
+
+                                button:hover {
+                                    box-shadow: 1px 1px #979797
+                                }
+
+                                button {
+                                    color: rgb(255, 255, 255);
+                                    background-color: rgb(253, 57, 74);
+                                    width: 80px;
+                                    height: 40px;
+                                    border-color: rgba(201, 25, 25, 0.479)
+                                }
+
+                                button.signUp {
+                                    color: rgb(255, 255, 255);
+                                    background-color: rgb(7, 7, 7);
+                                    width: 80px;
+                                    height: 40px;
+                                    border-color: rgba(58, 55, 55, 0.479)
+                                }
+
+                                input {
+                                    border-radius: 30px;
+                                    width: 400px;
+                                    height: 20px;
+
+                                }
+
+                                input:active,
+                                input:focus {
+                                    background-color: rgb(248, 203, 244)
+                                }
+                                .toast-top-full-width {
+									margin-top: 100px;
+									width: 360px;
+
+								}
+                            </style>
+
+<toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+
+                            <div style="margin:20px">
+                                <button ng-click="doLogin()">
+                                    <label> Login </label>
+                                </button>
+                                <button  ui-sref="membership-account-levels"  class="signUp">
+                                    <label> Sigin up </label>
+                                </button>
+
+                            </div>
+                            <!-- end pmpro_checkout-fields -->
+                        </div>
+                        <!-- end pmpro_user_fields -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

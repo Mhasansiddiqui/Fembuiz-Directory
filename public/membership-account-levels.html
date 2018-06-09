@@ -36,7 +36,23 @@
 												to the top of the list, we like to keep it fair. All accounts are the same profile design and self managed, so
 												you can come back at any time and make changes to your contact details, photo gallery, business categories, social
 												media links or to your URL media library. We want you to be able gain more customers, so let&#8217;s get started
-												&#8230;</p>
+												&#8230;
+											</p>
+
+										</div>
+									</div>
+
+									
+									<div class="wpb_text_column wpb_content_element ">
+										<div style="display: inline-flex;">
+											<label class="re-container">Business Owner
+												<input ng-model="business_type" type="radio" value="business_owner" name="radio">
+												<span class="checkmark"></span>
+											</label>
+											<label style="    margin-left: 30px;" class="re-container">Service Provider
+												<input ng-model="business_type" type="radio" value="service_provider" checked="checked" name="radio">
+												<span class="checkmark"></span>
+											</label>
 
 										</div>
 									</div>
@@ -84,7 +100,7 @@
 															<br />
 														</td>
 														<td>
-															<a class="pmpro_btn pmpro_btn-select" href="http://www.fembuiz.com.au/membership-account/membership-checkout/?level=4">Select</a>
+															<a class="pmpro_btn pmpro_btn-select" ng-click="doSetLevel()">Select</a>
 														</td>
 													</tr>
 
@@ -95,8 +111,6 @@
 													<a href="http://www.fembuiz.com.au" id="pmpro_levels-return-home">&larr; Return to Home</a>
 												</div>
 											</nav>
-
-
 										</div>
 									</div>
 								</div>
@@ -104,12 +118,7 @@
 						</div>
 					</div>
 				</div>
-
-
 			</div>
 		</div>
-
 	</div>
 </div>
-
-

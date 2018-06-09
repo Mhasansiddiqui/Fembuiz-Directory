@@ -1,0 +1,164 @@
+<div class="content content_top_margin">
+    <div class="content_inner  ">
+        <div class="container">
+            <div class="container_inner default_template_holder clearfix page_container_inner">
+                <div class="vc_row wpb_row section vc_row-fluid " style=' text-align:left;'>
+                    <div class=" full_section_inner clearfix">
+                        <div class="wpb_column vc_column_container vc_col-sm-12">
+                            <div class="vc_column-inner ">
+                                <div class="wpb_wrapper">
+
+                                    <style>
+                                        .p-text-wrap {
+                                            margin: 0;
+                                            padding: 0 !important;
+                                            text-overflow: ellipsis;
+                                            overflow: hidden;
+                                        }
+
+                                        .user-choice {
+                                            margin: 10px;
+                                            text-align: end;
+                                        }
+
+                                        .user-choice button {
+                                            height: 30px;
+                                            background-color: cadetblue;
+                                            border-color: rgb(42, 147, 153)
+                                        }
+
+                                        .user-choice button:focus {
+                                            background-color: rgb(51, 187, 51);
+                                            border-color: rgb(40, 143, 40)
+                                        }
+
+                                        .inline-row {
+                                            display: inline-flex
+                                        }
+
+                                        .search-row {
+
+                                            width: 140px;
+                                            height: 200px;
+                                            background-color: aliceblue;
+                                            text-align: center;
+                                        }
+
+                                        .css-image {
+                                            height: 80px;
+                                            width: 80px;
+                                            border-radius: 50%
+                                        }
+
+                                        .checked {
+                                            color: orange;
+                                        }
+                                    </style>
+
+                                    <div class="user-choice">
+                                        <button ng-click="doToggle()">Hire Service Worker</button>
+                                        <button ng-click="doToggle()">Jobs Posted</button>
+                                    </div>
+
+                                    <div ng-if=userChoiceHiring>
+                                        <label for="">
+                                            Hairdresser
+                                        </label>
+                                        <hr />
+
+                                        <div class="inline-row">
+
+                                            <div class="search-row">
+                                                <div class="card">
+                                                    <img class="css-image" src="images/cover1.jpg" alt="John">
+                                                    <h4>John Doe</h4>
+                                                    <span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </span>
+                                                    <p>
+                                                        <button class="card-button">Hire</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="search-row">
+                                                <div class="card">
+                                                    <img class="css-image" src="images/cover1.jpg" alt="John">
+                                                    <h4>John Doe</h4>
+                                                    <span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </span>
+                                                    <p>
+                                                        <button class="card-button">Hire</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <hr />
+
+                                    </div>
+
+                                    <div ng-if=!userChoiceHiring>
+                                        <label for="">
+                                            Hairdresser
+                                        </label>
+                                        <hr />
+
+                                        <div class="inline-row">
+
+                                            <div class="search-row">
+                                                <div class="card">
+                                                    <img class="css-image" src="images/cover2.jpg" alt="John">
+                                                    <h4>John Doe</h4>
+                                                    <span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </span>
+                                                    <p>
+                                                        <button class="card-button">Bid</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="search-row">
+                                                <div class="card">
+                                                    <img class="css-image" src="images/cover2.jpg" alt="John">
+                                                    <h4>John Doe</h4>
+                                                    <p class="p-text-wrap">Job Desctipion </p>
+
+                                                    <p>
+                                                        <button class="card-button ">Bid</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <hr />
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

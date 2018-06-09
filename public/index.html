@@ -6,8 +6,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+	<link href="./spinner.css" rel="stylesheet" type="text/css">
+	<link href="./radio-button.css" rel="stylesheet" type="text/css">
+	<link href="./card.css" rel="stylesheet" type="text/css">
 
 	<title>Fembuiz Directory</title>
+
+
 
 
 	<meta name="description" content="Enhance your online business profile, Create your profile with social media handles and photo gallery.
@@ -22,10 +27,25 @@ Building a database of women who are brave enough to tell us their story.">
 	<link rel="apple-touch-icon" href="https://www.fembuiz.com.au/wp-content/themes/bridge/img/favicon.ico">
 	<link href="./Fembuiz Directory_files/css" rel="stylesheet" type="text/css">
 
+
+
 	<script src="http://code.angularjs.org/1.2.13/angular.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
+	<script src="https://code.angularjs.org/1.2.0/angular-animate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<script src="app.js"></script>
 
+	<style>
+		.q_logo img {
+			width: 220px !important;
+		}
+	</style>
 
 	<div class="fit-vids-style" id="fit-vids-style" style="display: none;">­
 		<style>
@@ -399,7 +419,7 @@ Building a database of women who are brave enough to tell us their story.">
 													<span class="plus"></span>
 												</a>
 											</li>
-											<li ui-sref="signup" id="nav-menu-item-5445" class="menu-item menu-item-type-post_type menu-item-object-page  narrow">
+											<li ng-if="!isLogin" ui-sref="membership-account-levels" id="nav-menu-item-5445" class="menu-item menu-item-type-post_type menu-item-object-page  narrow">
 												<a href="http://www.fembuiz.com.au/membership-account/membership-levels/" class="" style="line-height: 75px;">
 													<i class="menu_icon blank fa"></i>
 													<span>Sign Up</span>
@@ -413,14 +433,14 @@ Building a database of women who are brave enough to tell us their story.">
 													<span class="plus"></span>
 												</a>
 											</li>
-											<li ui-sref="login" id="nav-menu-item-5808" class="menu-item menu-item-type-post_type menu-item-object-page  narrow">
+											<li ng-if="!isLogin" ui-sref="login" id="nav-menu-item-5808" class="menu-item menu-item-type-post_type menu-item-object-page  narrow">
 												<a href="http://www.fembuiz.com.au/login/" class="" style="line-height: 75px;">
 													<i class="menu_icon blank fa"></i>
 													<span>Login</span>
 													<span class="plus"></span>
 												</a>
 											</li>
-											<li ui-sref="logout" id="nav-menu-item-5804" class="menu-item menu-item-type-post_type menu-item-object-page  narrow">
+											<li ng-if="isLogin" ui-sref="logout" id="nav-menu-item-5804" class="menu-item menu-item-type-post_type menu-item-object-page  narrow">
 												<a href="http://www.fembuiz.com.au/logout/" class="" style="line-height: 75px;">
 													<i class="menu_icon blank fa"></i>
 													<span>Logout</span>

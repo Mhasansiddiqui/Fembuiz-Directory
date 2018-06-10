@@ -17,6 +17,7 @@ var Authentication = new mongoose.Schema({
     chash: { type: String, "default": null },
     isLogin: { type: Boolean, "default": false },
     business_name: { type: String },
+    business_type: { type: String },
     gender: { type: String },
     category: { type: String },
     Accessories: { type: String },
@@ -24,7 +25,9 @@ var Authentication = new mongoose.Schema({
     state: { type: String },
     about: { type: String },
     phoneNumber: { type: String },
-    membershipLevel: { type: Number }
+    membershipLevel: { type: Number },
+    country: { type: String },
+    zip: { type: String }
 });
 var authenticationModel = mongoose.model('authentication', Authentication);
 exports.saveAuthentication = function (object) {
@@ -154,6 +157,18 @@ exports.updateTokenAuthentication = function (object) {
     });
     return deffered.promise;
 };
+exports.updateOtherInfo = function (_id, object) {
+    var deffered = q.defer();
+    authenticationModel.findOneAndUpdate({ '_id': _id }, { $set: { business_type: object.business_type, state: object.state, zip: object.zip, country: object.country, phoneNumber: object.phoneNumber } }, { "new": true }, function (err, success) {
+        if (!err) {
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};
 exports.updateHashAuthentication = function (object) {
     var deffered = q.defer();
     authenticationModel.findOneAndUpdate({ '_id': object._id }, { $set: { isActivated: true, hash: null } }, { "new": true }, function (err, success) {
@@ -258,6 +273,20 @@ exports.getUserProfile = function (object) {
     var deffered = q.defer();
     authenticationModel
         .findOne({ username: object.username }, function (err, success) {
+        if (!err) {
+            console.log(success);
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};
+exports.getSingleUser = function (object) {
+    var deffered = q.defer();
+    authenticationModel
+        .findOne({ _id: object._id }, function (err, success) {
         if (!err) {
             console.log(success);
             deffered.resolve({ status: true, data: success });

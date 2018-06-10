@@ -1,9 +1,10 @@
 // app.js
 var routerApp = angular.module('routerApp', ['ui.router', 'toaster', 'ngAnimate']);
 
-routerApp.config(function ($stateProvider, $urlRouterProvider) {
+routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise('/home');
+    $httpProvider.interceptors.push('httpInterceptor');
 
     $stateProvider
 
@@ -33,7 +34,58 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 
         .state('account', {
             url: '/account',
-            templateUrl: 'account.html'
+            templateUrl: 'account.html',
+            controller: function ($scope, $http, toaster) {
+
+                $scope.user = ''
+                $scope.moreDetail = false;
+
+                $scope.data = {
+                    business_type: '',
+                    state: '',
+                    zip: '',
+                    country: '',
+                    phoneNumber: ''
+                }
+
+
+                $scope.doAddMoreDetail = function () {
+                    $scope.moreDetail = !$scope.moreDetail;
+                }
+
+                $scope.doSaveAccount = function () {
+
+                    $http({
+                        method: 'POST',
+                        data: {
+                            data: $scope.data
+                        },
+                        url: '/api/updateOtherInfo'
+                    }).then(function successCallback(response) {
+                        toaster.pop({
+
+                            title: 'Success',
+                            body: 'User Info Saved Successfully',
+                            onHideCallback: function () {
+                                $scope.user = response.data.users.data
+                            }
+
+                        });
+                    }, function errorCallback(response) {
+                        toaster.pop({
+                            type: 'error',
+                            title: 'Error',
+                            body: 'Something went wrong',
+                            bodyOutputType: 'trustedHtml'
+                        });
+                    })
+                }
+                $http.get("/api/SingleUser").then(function (response) {
+
+                    $scope.user = response.data.users.data
+
+                });
+            }
             // we'll get to this in a bit       
         })
 
@@ -80,7 +132,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
                             roll: $stateParams.business_type,
                             membershipLevel: $stateParams.level
                         },
-                        url: 'https://fembuiz.herokuapp.com/auth/signup'
+                        url: '/auth/signup'
                     }).then(function successCallback(response) {
                         toaster.pop({
 
@@ -107,12 +159,62 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('businessPage', {
             url: '/business',
             templateUrl: 'business.html',
-            controller: function ($scope) {
+            controller: function ($scope, $http, toaster) {
+
+
+                $scope.data = {
+                    business_type: '',
+                    state: '',
+                    zip: '',
+                    country: '',
+                    phoneNumber: '',
+                    jobDescription: '',
+                    duration: '',
+                    budget: '',
+
+                }
                 $scope.postJob = false;
                 $scope.doPostJob = function () {
                     $scope.postJob = !$scope.postJob;
+
                 }
+                $scope.doSaveJob = function () {
+                    $scope.isLoading = true;
+
+                    $http({
+                        method: 'POST',
+                        data: $scope.data,
+                        url: '/api/SavePost'
+                    }).then(function successCallback(response) {
+                        $scope.isLoading = false;
+                     
+                        console.log(response)
+                        
+
+                    }, function errorCallback(response) {
+                        $scope.isLoading = false;
+                        toaster.pop({
+                            type: 'error',
+                            title: 'Error',
+                            body: 'Something went wrong',
+                            bodyOutputType: 'trustedHtml'
+                        });
+                    })
+                }
+
+                $http.get("/api/UserPost").then(function (response) {
+
+                   $scope.jobs =  response.data.data.user;
+
+                });
+
+
+
+
+
             }
+
+            
             // we'll get to this in a bit       
         })
         .state('supportServices', {
@@ -134,10 +236,11 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
                             password: $scope.password,
                             email: $scope.email
                         },
-                        url: 'https://fembuiz.herokuapp.com/api/authenticate'
+                        url: '/api/authenticate'
                     }).then(function successCallback(response) {
                         $scope.isLoading = false;
                         if (response.data.user) {
+
                             localStorage.setItem('user', JSON.stringify(response.data.user));
                             $rootScope.isLogin = true;
                             $state.go('search')
@@ -164,4 +267,27 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
             }
             // we'll get to this in a bit       
         })
+}).factory("httpInterceptor", function () {
+    return {
+        request: function (config) {
+
+            //console.log("a http request is intersepted");
+
+            var auth = JSON.parse(localStorage.getItem("user"));
+
+            var token = auth.token
+            var id = auth._id;
+
+            config.headers.Authorization = "Bearer " + token;
+
+
+
+            if (token) {
+                config.url = config.url + "?_id=" + id;
+            }
+
+
+            return config;
+        }
+    }
 });

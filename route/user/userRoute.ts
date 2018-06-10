@@ -1,7 +1,8 @@
 
 //import { request } from 'https';
 
-import { getUserProfile, resendEmailToken, updateUserProfile, updateUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser } from '../../schema/authentication'
+import { getUserProfile, resendEmailToken, updateUserProfile, updateUser, getSingleUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser, updateOtherInfo } from '../../schema/authentication'
+import { savepost, getUserPost } from '../../schema/post'
 import { SendingMail } from '../../email-setup/email-function'
 
 import { json } from 'body-parser';
@@ -50,7 +51,7 @@ user.use(function (req, res, next) {
 
 import { Response, Express, Request } from 'express'
 user.all('/*', (req: Request, res: Response, next) => {
-  
+
     next();
 });
 
@@ -155,12 +156,11 @@ user.get('/emailUser', (req, res) => {
 
 user.post('/authenticate', (req, res) => {
 
-    console.log(req.body)
 
     findEmailExist(req.body)
         .then((resolve) => {
             if (resolve.data != null) {
-                
+
                 findAuthentication(req.body)
                     .then((resolve) => {
                         if (resolve.data != null) {
@@ -201,7 +201,7 @@ user.get("/secretDebug",
  */
 
 
-user.get('/allUsers', (req, res) => {
+user.get('/F', (req, res) => {
 
 
     let token = req.get('Authorization');
@@ -247,10 +247,10 @@ user.get('/users', (req, res) => {
 
 user.get('/user', (req, res) => {
     ///removing header
-  /*   let token = req.get('Authorization');
-    req.query.token = token.replace("Bearer", "").replace(/ /g, '');
- */
-    findUser({_id : req.query.userid})
+    /*   let token = req.get('Authorization');
+      req.query.token = token.replace("Bearer", "").replace(/ /g, '');
+   */
+    findUser({ _id: req.query.userid })
         .then((resolve) => {
             res.status(200).json({ users: resolve });
         }, (error) => {
@@ -336,7 +336,7 @@ user.get('/resendEmailToken', (req, res) => {
         })
 })
 
-user.get('/userprofile', (req, res) => {
+user.get('/UserProfile', (req, res) => {
 
     getUserProfile(req.query)
         .then((resolve) => {
@@ -346,5 +346,72 @@ user.get('/userprofile', (req, res) => {
             else {
                 res.status(200).json({ user: 0, message: "User Not Found" });
             }
+        })
+})
+
+user.get('/SingleUser', (req, res) => {
+
+    getSingleUser(req.query)
+        .then((resolve) => {
+            if (resolve.data != null) {
+                res.status(200).json({ users: resolve });
+            }
+            else {
+                res.status(200).json({ user: 0, message: "User Not Found" });
+            }
+        })
+})
+
+
+user.post('/updateOtherInfo', (req, res) => {
+
+
+    console.log('here is up data', req.query._id, req.body.data)
+    updateOtherInfo(req.query._id, req.body.data)
+        .then((resolve) => {
+            if (resolve.data != null) {
+                res.status(200).json({ users: resolve });
+            }
+            else {
+                res.status(200).json({ user: 0, message: "Info Not Save" });
+            }
+        })
+})
+
+user.post('/SavePost', (req, res) => {
+
+    let token = req.get('Authorization');
+    req.body.token = token.replace("Bearer", "").replace(/ /g, '');
+
+    req.body.postedBy = req.query._id;
+
+    savepost(req.body)
+        .then((resolve) => {
+            if (resolve.data != null) {
+                res.status(200).json({ data: { user: resolve.data } });
+            }
+            else {
+                res.status(200).json({ data: { user: 0, message: 'Post Not Saved' } });
+            }
+        }, (error) => {
+            res.status(204).json({ message: "Post Not Found" });
+        })
+})
+
+user.get('/UserPost', (req, res) => {
+
+    let token = req.get('Authorization');
+    req.body.token = token.replace("Bearer", "").replace(/ /g, '');
+
+    getUserPost(req.query._id)
+        .then((resolve) => {
+            if (resolve.data != null) {
+                res.status(200).json({ data: { user: resolve.data } });
+            }
+            else {
+                res.status(200).json({ data: { user: 0, message: 'Post Not Saved' } });
+            }
+        }, (error) => {
+            res.status(204).json({ message: "Post Not Found" });
         })
 })

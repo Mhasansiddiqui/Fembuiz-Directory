@@ -19,7 +19,7 @@ var Authentication = new mongoose.Schema({
     chash: { type: String, default: null },
     isLogin: { type: Boolean, default: false },
     business_name: { type: String },
-    business_type: {type:String},
+    business_type: { type: String },
     gender: { type: String },
     category: { type: String },
     Accessories: { type: String },
@@ -27,7 +27,10 @@ var Authentication = new mongoose.Schema({
     state: { type: String },
     about: { type: String },
     phoneNumber: { type: String },
-    membershipLevel: { type: Number }
+    membershipLevel: { type: Number },
+    country: { type: String },
+    zip: { type: String },
+
 
 })
 
@@ -178,6 +181,8 @@ export let findUser = function (object) {
 
     let deffered = q.defer();
 
+
+
     authenticationModel
         .findOne(object, (err, success) => {
             if (!err) {
@@ -197,6 +202,24 @@ export let updateTokenAuthentication = function (object) {
     authenticationModel.findOneAndUpdate(
         { '_id': object.data._id },
         { $set: { token: object.data.token } },
+        { new: true },
+        (err, success) => {
+            if (!err) {
+                deffered.resolve({ status: true, data: success });
+            }
+            else {
+                deffered.reject({ status: false, data: err })
+            }
+
+        });
+    return deffered.promise;
+}
+
+export let updateOtherInfo = function (_id, object) {
+    let deffered = q.defer();
+    authenticationModel.findOneAndUpdate(
+        { '_id': _id },
+        { $set: { business_type : object.business_type , state : object.state , zip : object.zip , country : object.country , phoneNumber : object.phoneNumber } },
         { new: true },
         (err, success) => {
             if (!err) {
@@ -389,4 +412,24 @@ export let getUserProfile = function (object) {
     return deffered.promise;
 }
 
+
+
+export let getSingleUser = function (object) {
+
+    let deffered = q.defer();
+
+    authenticationModel
+        .findOne({ _id: object._id }, (err, success) => {
+
+            if (!err) {
+                console.log(success)
+                deffered.resolve({ status: true, data: success });
+            }
+            else {
+                deffered.reject({ status: false, data: err })
+            }
+
+        });
+    return deffered.promise;
+}
 

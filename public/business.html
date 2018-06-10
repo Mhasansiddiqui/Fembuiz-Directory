@@ -74,11 +74,25 @@
 
                         <div ng-if="postJob" id="pmpro_user_fields" class="pmpro_checkout">
 
+
+
+
+
+
+
                             <div class="pmpro_checkout-fields">
                                 <div class="pmpro_checkout-field pmpro_checkout-field-username">
                                     <label>Expertise</label>
-                                    <select>
-                                        <option value="volvo">Hairdresser</option>
+                                    <select ng-model="data.business_type">
+                                        <option value="HairDresser">Hair Dresser</option>
+                                        <option value="HouseCleaner">House Cleaner</option>
+                                        <option value="Housesitter">Housesitter</option>
+                                        <option value="IndependentTourGuide">Independent Tour Guide</option>
+                                        <option value="MassageTherapist">Massage Therapist</option>
+                                        <option value="MealPlanningExpert">Meal Planning Expert</option>
+                                        <option value="MusicInstructor">Music Instructor</option>
+                                        <option value="NurseCaseWorker">Nurse Case Worker</option>
+
 
                                     </select>
                                 </div>
@@ -86,46 +100,45 @@
 
 
                                 <div class="pmpro_checkout-field pmpro_checkout-field-bconfirmemail">
-                                    <label for="bconfirmemail">Job Descrtion</label>
-                                    <textarea id="bconfirmemail" name="bconfirmemail" type="text" class="input pmpro_required" size="30" value=""></textarea>
+                                    <label for="jobdescription">Job Descrtion</label>
+                                    <textarea id="jobdescription" ng-model="data.jobdescription" name="jobdescription" type="text" class="input pmpro_required"
+                                        size="30" value=""></textarea>
 
                                 </div>
 
                                 <div class="pmpro_checkout-field pmpro_checkout-field-password">
-                                    <label for="password">State/Province</label>
-                                    <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value=""
+                                    <label for="state">State/Province</label>
+                                    <input ng-model="data.state" id="state" name="state" type="text" class="input pmpro_required" size="30" value="" />
+                                </div>
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-password">
+                                    <label for="duration">Duration</label>
+                                    <input ng-model="data.duration" id="duration" name="duration" type="text" class="input pmpro_required" size="30" value=""
                                     />
                                 </div>
 
                                 <div class="pmpro_checkout-field pmpro_checkout-field-password">
-                                    <label for="password">Duration</label>
-                                    <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value=""
-                                    />
-                                </div>
-
-                                <div class="pmpro_checkout-field pmpro_checkout-field-password">
-                                    <label for="password">Budget</label>
-                                    <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value=""
-                                    />
+                                    <label for="budget">Budget</label>
+                                    <input ng-model="data.budget" id="budget" name="budget" type="text" class="input pmpro_required" size="30" value="" />
                                 </div>
                                 <!-- end pmpro_checkout-field-password -->
 
                                 <div class="pmpro_checkout-field pmpro_checkout-field-password2">
-                                    <label for="password2">Zip</label>
-                                    <input id="password2" name="password2" type="password" class="input pmpro_required" size="30" value="" />
+                                    <label for="zip">Zip</label>
+                                    <input id="zip" ng-model="data.zip" name="zip" type="text" class="input pmpro_required" size="30" value="" />
                                 </div>
                                 <!-- end pmpro_checkout-field-password2 -->
 
 
                                 <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
-                                    <label for="bemail">Country</label>
-                                    <input ng-model="email" id="bemail" name="bemail" type="email" class="input pmpro_required" size="30" value="" />
+                                    <label for="country">Country</label>
+                                    <input ng-model="country" id="country" name="country" type="text" class="input pmpro_required" size="30" value="" />
                                 </div>
                                 <!-- end pmpro_checkout-field-bemail -->
 
                                 <div class="pmpro_checkout-field pmpro_checkout-field-bconfirmemail">
-                                    <label for="bconfirmemail">PHONE</label>
-                                    <input id="bconfirmemail" name="bconfirmemail" type="email" class="input pmpro_required" size="30" value="" />
+                                    <label for="phone">PHONE</label>
+                                    <input id="phone" ng-model="phoneNumber" name="phone" type="text" class="input pmpro_required" size="30" value="" />
                                 </div>
 
 
@@ -169,12 +182,24 @@
                                     width: 360px;
 
                                 }
+
+                                .p-text-wrap {
+                                    margin: 0;
+                                    padding: 0 !important;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                }
                             </style>
 
                             <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
 
 
-                            <button ng-click="doSaveAccount()" style="">Post Job</button>
+                            <label ng-if="isLoading">
+                                <div class="loader">Loading...</div>
+                            </label>
+
+
+                            <button ng-click="doSaveJob()" style="">Post Job</button>
 
 
                             <!-- end pmpro_checkout-fields -->
@@ -189,39 +214,24 @@
 
                             <div class="inline-row">
 
-                                <div class="search-row">
+                                <div class="search-row" ng-repeat="job in jobs">
                                     <div class="card">
                                         <img class="css-image" src="images/cover1.jpg" alt="John">
-                                        <h4>John Doe</h4>
-                                        <span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
+                                        <h4 class="p-text-wrap">{{job.business_type}}</h4>
+                                        <span ng-if="job.josStatus == just_posted">
+                                            <span class="fa fa-star "></span>
+                                            <span class="fa fa-star "></span>
+                                            <span class="fa fa-star "></span>
                                             <span class="fa fa-star"></span>
                                             <span class="fa fa-star"></span>
                                         </span>
                                         <p>
-                                            <button class="card-button">Completed</button>
+                                            <button class="card-button">Just Posted</button>
                                         </p>
                                     </div>
                                 </div>
 
-                                <div class="search-row">
-                                    <div class="card">
-                                        <img class="css-image" src="images/cover1.jpg" alt="John">
-                                        <h4>John Doe</h4>
-                                        <span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </span>
-                                        <p>
-                                            <button class="card-button">Completed</button>
-                                        </p>
-                                    </div>
-                                </div>
+
 
                             </div>
 

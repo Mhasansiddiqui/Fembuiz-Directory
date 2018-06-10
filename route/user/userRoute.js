@@ -2,6 +2,7 @@
 //import { request } from 'https';
 exports.__esModule = true;
 var authentication_1 = require("../../schema/authentication");
+var post_1 = require("../../schema/post");
 var email_function_1 = require("../../email-setup/email-function");
 var express = require('express');
 exports.user = express.Router();
@@ -117,7 +118,6 @@ exports.user.get('/emailUser', function (req, res) {
     });
 });
 exports.user.post('/authenticate', function (req, res) {
-    console.log(req.body);
     authentication_1.findEmailExist(req.body)
         .then(function (resolve) {
         if (resolve.data != null) {
@@ -153,7 +153,7 @@ user.get("/secretDebug",
     });
 
  */
-exports.user.get('/allUsers', function (req, res) {
+exports.user.get('/F', function (req, res) {
     var token = req.get('Authorization');
     req.query.token = token.replace("Bearer", "").replace(/ /g, '');
     authentication_1.findUser(req.query)
@@ -258,7 +258,7 @@ exports.user.get('/resendEmailToken', function (req, res) {
         res.status(200).json({ message: "error" });
     });
 });
-exports.user.get('/userprofile', function (req, res) {
+exports.user.get('/UserProfile', function (req, res) {
     authentication_1.getUserProfile(req.query)
         .then(function (resolve) {
         if (resolve.data != null) {
@@ -267,5 +267,59 @@ exports.user.get('/userprofile', function (req, res) {
         else {
             res.status(200).json({ user: 0, message: "User Not Found" });
         }
+    });
+});
+exports.user.get('/SingleUser', function (req, res) {
+    authentication_1.getSingleUser(req.query)
+        .then(function (resolve) {
+        if (resolve.data != null) {
+            res.status(200).json({ users: resolve });
+        }
+        else {
+            res.status(200).json({ user: 0, message: "User Not Found" });
+        }
+    });
+});
+exports.user.post('/updateOtherInfo', function (req, res) {
+    console.log('here is up data', req.query._id, req.body.data);
+    authentication_1.updateOtherInfo(req.query._id, req.body.data)
+        .then(function (resolve) {
+        if (resolve.data != null) {
+            res.status(200).json({ users: resolve });
+        }
+        else {
+            res.status(200).json({ user: 0, message: "Info Not Save" });
+        }
+    });
+});
+exports.user.post('/SavePost', function (req, res) {
+    var token = req.get('Authorization');
+    req.body.token = token.replace("Bearer", "").replace(/ /g, '');
+    req.body.postedBy = req.query._id;
+    post_1.savepost(req.body)
+        .then(function (resolve) {
+        if (resolve.data != null) {
+            res.status(200).json({ data: { user: resolve.data } });
+        }
+        else {
+            res.status(200).json({ data: { user: 0, message: 'Post Not Saved' } });
+        }
+    }, function (error) {
+        res.status(204).json({ message: "Post Not Found" });
+    });
+});
+exports.user.get('/UserPost', function (req, res) {
+    var token = req.get('Authorization');
+    req.body.token = token.replace("Bearer", "").replace(/ /g, '');
+    post_1.getUserPost(req.query._id)
+        .then(function (resolve) {
+        if (resolve.data != null) {
+            res.status(200).json({ data: { user: resolve.data } });
+        }
+        else {
+            res.status(200).json({ data: { user: 0, message: 'Post Not Saved' } });
+        }
+    }, function (error) {
+        res.status(204).json({ message: "Post Not Found" });
     });
 });

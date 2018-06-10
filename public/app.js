@@ -187,9 +187,9 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                         url: '/api/SavePost'
                     }).then(function successCallback(response) {
                         $scope.isLoading = false;
-                     
+
                         console.log(response)
-                        
+
 
                     }, function errorCallback(response) {
                         $scope.isLoading = false;
@@ -204,7 +204,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
                 $http.get("/api/UserPost").then(function (response) {
 
-                   $scope.jobs =  response.data.data.user;
+                    $scope.jobs = response.data.data.user;
 
                 });
 
@@ -214,7 +214,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
             }
 
-            
+
             // we'll get to this in a bit       
         })
         .state('supportServices', {
@@ -275,9 +275,11 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
             var auth = JSON.parse(localStorage.getItem("user"));
 
-            var token = auth.token
-            var id = auth._id;
+            if (auth) {
+                var token = auth.token
+                var id = auth._id;
 
+            }
             config.headers.Authorization = "Bearer " + token;
 
 

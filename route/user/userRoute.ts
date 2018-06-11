@@ -1,8 +1,8 @@
 
 //import { request } from 'https';
 
-import { getUserProfile, resendEmailToken, updateUserProfile, updateUser, getSingleUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser, updateOtherInfo } from '../../schema/authentication'
-import { savepost, getUserPost } from '../../schema/post'
+import { getUserProfile, resendEmailToken,getServiceProvider ,updateUserProfile, updateUser, getSingleUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser, updateOtherInfo } from '../../schema/authentication'
+import { savepost, getUserPost, getJustPostedJob } from '../../schema/post'
 import { SendingMail } from '../../email-setup/email-function'
 
 import { json } from 'body-parser';
@@ -404,6 +404,42 @@ user.get('/UserPost', (req, res) => {
     req.body.token = token.replace("Bearer", "").replace(/ /g, '');
 
     getUserPost(req.query._id)
+        .then((resolve) => {
+            if (resolve.data != null) {
+                res.status(200).json({ data: { user: resolve.data } });
+            }
+            else {
+                res.status(200).json({ data: { user: 0, message: 'Post Not Saved' } });
+            }
+        }, (error) => {
+            res.status(204).json({ message: "Post Not Found" });
+        })
+})
+
+user.get('/AllJustPostedJob', (req, res) => {
+
+    let token = req.get('Authorization');
+    req.body.token = token.replace("Bearer", "").replace(/ /g, '');
+
+    getJustPostedJob()
+        .then((resolve) => {
+            if (resolve.data != null) {
+                res.status(200).json({ data: { user: resolve.data } });
+            }
+            else {
+                res.status(200).json({ data: { user: 0, message: 'Post Not Found' } });
+            }
+        }, (error) => {
+            res.status(204).json({ message: "Post Not Found" });
+        })
+})
+
+user.get('/getServiceProvider', (req, res) => {
+
+    let token = req.get('Authorization');
+    req.body.token = token.replace("Bearer", "").replace(/ /g, '');
+
+    getServiceProvider()
         .then((resolve) => {
             if (resolve.data != null) {
                 res.status(200).json({ data: { user: resolve.data } });

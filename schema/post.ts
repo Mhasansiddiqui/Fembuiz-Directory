@@ -55,3 +55,27 @@ export let getUserPost = function (_id) {
         });
     return deffered.promise;
 }
+
+
+
+
+export let getJustPostedJob = function () {
+
+    let deffered = q.defer();
+
+    postModel
+        .find({ josStatus: 'just_posted' }, {})
+        .populate('postedBy')
+        .exec((err, success) => {
+
+            if (!err) {
+                console.log(success)
+                deffered.resolve({ status: true, data: success });
+            }
+            else {
+                deffered.reject({ status: false, data: err })
+            }
+        })
+
+    return deffered.promise;
+}

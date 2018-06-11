@@ -433,3 +433,22 @@ export let getSingleUser = function (object) {
     return deffered.promise;
 }
 
+export let getServiceProvider = function () {
+
+    let deffered = q.defer();
+
+    authenticationModel
+        .find({ roll: 'service_provider' }, {})       
+        .exec((err, success) => {
+
+            if (!err) {
+                console.log(success)
+                deffered.resolve({ status: true, data: success });
+            }
+            else {
+                deffered.reject({ status: false, data: err })
+            }
+        })
+
+    return deffered.promise;
+}

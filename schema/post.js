@@ -43,3 +43,19 @@ exports.getUserPost = function (_id) {
     });
     return deffered.promise;
 };
+exports.getJustPostedJob = function () {
+    var deffered = q.defer();
+    postModel
+        .find({ josStatus: 'just_posted' }, {})
+        .populate('postedBy')
+        .exec(function (err, success) {
+        if (!err) {
+            console.log(success);
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};

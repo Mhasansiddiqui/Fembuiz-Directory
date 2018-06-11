@@ -297,3 +297,18 @@ exports.getSingleUser = function (object) {
     });
     return deffered.promise;
 };
+exports.getServiceProvider = function () {
+    var deffered = q.defer();
+    authenticationModel
+        .find({ roll: 'service_provider' }, {})
+        .exec(function (err, success) {
+        if (!err) {
+            console.log(success);
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};

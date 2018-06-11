@@ -106,13 +106,61 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('search', {
             url: '/search',
             templateUrl: 'search.html',
-            controller: function ($scope) {
+            controller: function ($scope, $http) {
+
+                var business_type = ["HairDresser", "HouseCleaner", "Housesitter", "IndependentTourGuide"
+                    , "MassageTherapist", "MealPlanningExpert", "MusicInstructor", "NurseCaseWorker"];
+
                 $scope.userChoiceHiring = true;
 
                 $scope.doToggle = function () {
                     $scope.userChoiceHiring = !$scope.userChoiceHiring;
                 }
 
+                $http.get("/api/getServiceProvider")
+                    .then(function (response) {
+                         $scope.users = response.data.data.user;
+                    })
+
+                $http.get("/api/AllJustPostedJob").then(function (response) {
+
+                    $scope.HairDresser = [];
+                    $scope.HouseCleaner = [];
+                    $scope.MealPlanningExpert = [];
+                    $scope.Housesitter = [];
+                    $scope.IndependentTourGuide = [];
+                    $scope.MassageTherapist = [];
+                    $scope.MusicInstructor = [];
+                    $scope.NurseCaseWorker = [];
+
+                    var i = response.data.data.user;
+                    i.forEach(item => {
+                        if (item.business_type == "HairDresser") {
+                            $scope.HairDresser.push(item)
+                        }
+                        if (item.business_type == "HouseCleaner") {
+                            $scope.HouseCleaner.push(item)
+                        }
+                        if (item.business_type == "Housesitter") {
+                            $scope.Housesitter.push(item)
+                        }
+                        if (item.business_type == "IndependentTourGuide") {
+                            $scope.IndependentTourGuide.push(item)
+                        }
+                        if (item.business_type == "MassageTherapist") {
+                            $scope.MassageTherapist.push(item)
+                        }
+                        if (item.business_type == "MealPlanningExpert") {
+                            $scope.MealPlanningExpert.push(item)
+                        }
+                        if (item.business_type == "MusicInstructor") {
+                            $scope.MusicInstructor.push(item)
+                        }
+                        if (item.business_type == "NurseCaseWorker") {
+                            $scope.NurseCaseWorker.push(item)
+                        }
+                    })
+                });
             }
         })
 
@@ -292,4 +340,5 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             return config;
         }
     }
-});
+})
+

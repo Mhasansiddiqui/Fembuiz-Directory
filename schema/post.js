@@ -59,10 +59,10 @@ exports.getJustPostedJob = function () {
     });
     return deffered.promise;
 };
-exports.getToHire = function (_id) {
+exports.getToHire = function (_id, b) {
     var deffered = q.defer();
     postModel
-        .find({ postedBy: _id })
+        .find({ postedBy: _id, business_type: b })
         .exec(function (err, success) {
         if (!err) {
             console.log(success);

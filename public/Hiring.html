@@ -1,0 +1,105 @@
+<div class="content content_top_margin">
+    <div class="content_inner  ">
+        <div class="container">
+            <div class="container_inner default_template_holder clearfix page_container_inner">
+                <div id="pmpro_level-2">
+                    <form style="margin:10px 10px 10px 10px;border:solid 2px rgb(230, 172, 182);padding:10px 10px 10px 10px" id="pmpro_form"
+                        class="pmpro_form" action="" method="post">
+
+                        <input type="hidden" id="level" name="level" value="2" />
+                        <input type="hidden" id="checkjavascript" name="checkjavascript" value="1" />
+
+                        <div id="pmpro_message" class="pmpro_message" style="display: none;"></div>
+
+                        <div id="pmpro_pricing_fields" class="pmpro_checkout">
+                            <!-- end pmpro_checkout-fields -->
+                        </div>
+                        <!-- end pmpro_pricing_fields -->
+                        <div id="pmpro_user_fields" ng-repeat="post in posts" class="pmpro_checkout">
+                            <div class="pmpro_checkout-fields">
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <div style="display:inline">
+                                        <label style="display:inline" for="bemail">business_type</label>
+                                        <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{post.business_type}} </label>
+                                    </div>
+                                </div>
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <div style="display:inline">
+                                        <label style="display:inline" for="bemail">budget</label>
+                                        <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{post.budget}} </label>
+                                    </div>
+                                </div>
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <div style="display:inline">
+                                        <label style="display:inline" for="bemail">duration</label>
+                                        <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{post.duration}} </label>
+                                    </div>
+                                </div>
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <div style="display:inline">
+                                        <label style="display:inline" for="bemail">jobDescription</label>
+                                        <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{post.jobDescription}} </label>
+                                    </div>
+                                </div>
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <div style="display:inline">
+                                        <label style="display:inline" for="bemail">state</label>
+                                        <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{post.state}} </label>
+                                    </div>
+                                </div>
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <div style="display:inline">
+                                        <label style="display:inline" for="bemail">phoneNumber</label>
+                                        <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{post.phoneNumber}} </label>
+                                    </div>
+                                </div>
+                                <style>
+                                    button:hover {
+                                        box-shadow: 1px 1px #979797
+                                    }
+
+                                    button {
+                                        color: rgb(255, 255, 255);
+                                        background-color: rgb(253, 57, 74);
+                                        width: 80px;
+                                        height: 40px;
+                                        border-color: rgba(201, 25, 25, 0.479)
+                                    }
+
+                                    input {
+                                        border-radius: 30px;
+                                        width: 400px;
+                                        height: 20px;
+
+                                    }
+
+                                    input:active,
+                                    input:focus {
+                                        background-color: rgba(83, 189, 83, 0.493)
+                                    }
+
+                                    .toast-top-full-width {
+                                        top: 100px;
+                                        width: 360px;
+
+                                    }
+                                </style>
+                                <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+                                <label ng-if="isLoading">
+                                    <div class="loader">Loading...</div>
+                                </label>
+                                <button ng-click="doSaveAccount()" style="">Confirm</button>
+                            </div>
+                        </div>
+                        <!-- end pmpro_user_fields -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

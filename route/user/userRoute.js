@@ -281,7 +281,6 @@ exports.user.get('/SingleUser', function (req, res) {
     });
 });
 exports.user.post('/updateOtherInfo', function (req, res) {
-    console.log('here is up data', req.query._id, req.body.data);
     authentication_1.updateOtherInfo(req.query._id, req.body.data)
         .then(function (resolve) {
         if (resolve.data != null) {
@@ -356,7 +355,12 @@ exports.user.get('/getServiceProvider', function (req, res) {
 exports.user.get('/toHire', function (req, res) {
     var token = req.get('Authorization');
     req.body.token = token.replace("Bearer", "").replace(/ /g, '');
-    post_1.getToHire(req.query._id)
+    var q = req.query.exprty;
+    var b = q.indexOf('=');
+    var _id = q.substring(b + 1, q.length);
+    var c = q.indexOf('?');
+    var experty = q.substring(0, c);
+    post_1.getToHire(_id, experty)
         .then(function (resolve) {
         if (resolve.data != null) {
             res.status(200).json({ data: { user: resolve.data } });

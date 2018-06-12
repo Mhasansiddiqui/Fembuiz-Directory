@@ -1,8 +1,8 @@
 
 //import { request } from 'https';
 
-import { getUserProfile, resendEmailToken,getServiceProvider ,updateUserProfile, updateUser, getSingleUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser, updateOtherInfo } from '../../schema/authentication'
-import { savepost, getToHire,getUserPost, getJustPostedJob } from '../../schema/post'
+import { getUserProfile, resendEmailToken, getServiceProvider, updateUserProfile, updateUser, getSingleUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser, updateOtherInfo } from '../../schema/authentication'
+import { savepost, getToHire, getUserPost, getJustPostedJob } from '../../schema/post'
 import { SendingMail } from '../../email-setup/email-function'
 
 import { json } from 'body-parser';
@@ -366,7 +366,6 @@ user.get('/SingleUser', (req, res) => {
 user.post('/updateOtherInfo', (req, res) => {
 
 
-    console.log('here is up data', req.query._id, req.body.data)
     updateOtherInfo(req.query._id, req.body.data)
         .then((resolve) => {
             if (resolve.data != null) {
@@ -452,13 +451,20 @@ user.get('/getServiceProvider', (req, res) => {
         })
 })
 
-user.get('/toHire',(req, res) => {
+user.get('/toHire', (req, res) => {
 
     let token = req.get('Authorization');
     req.body.token = token.replace("Bearer", "").replace(/ /g, '');
 
-    
-    getToHire(req.query._id)
+    let q = req.query.exprty;
+
+    let b = q.indexOf('=');
+    let _id =  q.substring(b + 1, q.length);
+
+    let c = q.indexOf('?');
+    let experty = q.substring(0,c)
+
+    getToHire(_id,experty)
         .then((resolve) => {
             if (resolve.data != null) {
                 res.status(200).json({ data: { user: resolve.data } });

@@ -103,10 +103,24 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             }
             // we'll get to this in a bit       
         })
+        .state('hiring', {
+            url: '/hiring/load?obj',
+            templateUrl: 'Hiring.html',
+
+            controller: function ($scope, $http, $stateParams) {
+
+                let ps = JSON.parse($stateParams.obj);
+
+                console.log(ps.data.data.user);
+                $scope.posts = ps.data.data.user;
+
+
+            }
+        })
         .state('search', {
             url: '/search',
             templateUrl: 'search.html',
-            controller: function ($scope, $http) {
+            controller: function ($scope, $http, $state) {
 
                 var business_type = ["HairDresser", "HouseCleaner", "Housesitter", "IndependentTourGuide"
                     , "MassageTherapist", "MealPlanningExpert", "MusicInstructor", "NurseCaseWorker"];
@@ -118,9 +132,10 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
 
                 $scope.toHire = function (experties) {
-                    $http.get("/api/toHire&exprty="+experties)
+
+                    $http.get("/api/toHire?exprty=" + experties)
                         .then(function (response) {
-                            console.log(response)
+                            $state.go('hiring', { obj: JSON.stringify(response) });
                         })
                 }
 

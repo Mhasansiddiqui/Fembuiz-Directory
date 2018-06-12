@@ -80,13 +80,13 @@ export let getJustPostedJob = function () {
     return deffered.promise;
 }
 
-export let getToHire = function (_id) {
+export let getToHire = function (_id,b) {
 
     let deffered = q.defer();
 
     postModel
-        .find({postedBy: _id })
-        .exec((err, success) => {
+        .find({postedBy: _id , business_type : b })
+        .exec((err, success) => { 
 
             if (!err) {
                 console.log(success)

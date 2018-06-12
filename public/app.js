@@ -117,9 +117,52 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                     $scope.userChoiceHiring = !$scope.userChoiceHiring;
                 }
 
+                $scope.toHire = function (experties) {
+                    $http.get("/api/toHire&exprty="+experties)
+                        .then(function (response) {
+                            console.log(response)
+                        })
+                }
+
                 $http.get("/api/getServiceProvider")
                     .then(function (response) {
-                         $scope.users = response.data.data.user;
+                        //  $scope.users = response.data.data.user;
+                        $scope.SHairDresser = [];
+                        $scope.SHouseCleaner = [];
+                        $scope.SMealPlanningExpert = [];
+                        $scope.SHousesitter = [];
+                        $scope.SIndependentTourGuide = [];
+                        $scope.SMassageTherapist = [];
+                        $scope.SMusicInstructor = [];
+                        $scope.SNurseCaseWorker = [];
+
+                        var i = response.data.data.user;
+                        i.forEach(item => {
+                            if (item.business_type == "HairDresser") {
+                                $scope.SHairDresser.push(item)
+                            }
+                            if (item.business_type == "HouseCleaner") {
+                                $scope.SHouseCleaner.push(item)
+                            }
+                            if (item.business_type == "Housesitter") {
+                                $scope.SHousesitter.push(item)
+                            }
+                            if (item.business_type == "IndependentTourGuide") {
+                                $scope.SIndependentTourGuide.push(item)
+                            }
+                            if (item.business_type == "MassageTherapist") {
+                                $scope.SMassageTherapist.push(item)
+                            }
+                            if (item.business_type == "MealPlanningExpert") {
+                                $scope.SMealPlanningExpert.push(item)
+                            }
+                            if (item.business_type == "MusicInstructor") {
+                                $scope.SMusicInstructor.push(item)
+                            }
+                            if (item.business_type == "NurseCaseWorker") {
+                                $scope.SNurseCaseWorker.push(item)
+                            }
+                        })
                     })
 
                 $http.get("/api/AllJustPostedJob").then(function (response) {

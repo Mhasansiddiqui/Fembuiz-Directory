@@ -59,3 +59,18 @@ exports.getJustPostedJob = function () {
     });
     return deffered.promise;
 };
+exports.getToHire = function (_id) {
+    var deffered = q.defer();
+    postModel
+        .find({ postedBy: _id })
+        .exec(function (err, success) {
+        if (!err) {
+            console.log(success);
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};

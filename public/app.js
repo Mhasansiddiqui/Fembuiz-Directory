@@ -12,7 +12,9 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('home', {
             url: '/home',
             templateUrl: 'home.html',
-            controller: function ($scope) {
+            controller: function ($scope, $rootScope) {
+
+                $rootScope.isLogin = false;
                 $scope.name = function () {
 
                 }
@@ -108,13 +110,13 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             templateUrl: 'Hiring.html',
 
             controller: function ($scope, $http, $stateParams, toaster) {
-
                 let ps = JSON.parse($stateParams.obj);
-
                 $scope.posts = ps.data.data.user;
 
 
                 $scope.doConfirm = function (_id) {
+
+                    $scope.isLoading = true;                   
                     $http({
                         method: 'POST',
                         data: {
@@ -127,6 +129,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                     }).then(function successCallback(response) {
                         $scope.isLoading = false;
                         console.log(response)
+
                     }, function errorCallback(response) {
                         $scope.isLoading = false;
                         toaster.pop({
@@ -284,6 +287,13 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
             }  // we'll get to this in a bit       
         })
+        .state('logout', {
+            url: '/logout',
+            controller: function ($rootScope, $state) {
+                $rootScope.isLogin = true;
+                $state.go('home')
+            }
+        })
         .state('jobdetail', {
             url: '/jobdetail/load?obj',
             templateUrl: 'complete.html',
@@ -337,9 +347,9 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
                     console.log({
                         postid: postid,
-                            noOfStars: noOfStars,
-                            comments: $scope.comments,
-                            josStatus : 'completed'
+                        noOfStars: noOfStars,
+                        comments: $scope.comments,
+                        josStatus: 'completed'
                     })
                     $http({
                         method: 'POST',
@@ -347,7 +357,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                             postid: postid,
                             noOfStars: noOfStars,
                             comments: $scope.comments,
-                            josStatus : 'completed'
+                            josStatus: 'completed'
                         },
                         url: '/api/SaveReview'
                     }).then(function successCallback(response) {
@@ -401,7 +411,11 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                     }).then(function successCallback(response) {
                         $scope.isLoading = false;
 
-                        console.log(response)
+                        $http.get("/api/UserPost").then(function (response) {
+
+                            $scope.jobs = response.data.data.user;
+
+                        });
 
 
                     }, function errorCallback(response) {

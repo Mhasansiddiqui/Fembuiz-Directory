@@ -15,8 +15,16 @@
                             <!-- end pmpro_checkout-fields -->
                         </div>
                         <!-- end pmpro_pricing_fields -->
+
+                        
+                         <label ng-if="isLoading">
+                                    <div class="loader">Loading...</div>
+                                </label>
+
                         <div id="pmpro_user_fields" ng-repeat="post in posts" class="pmpro_checkout">
                             <div class="pmpro_checkout-fields">
+
+
 
                                 <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
                                     <div style="display:inline">
@@ -89,13 +97,16 @@
 
                                     }
                                 </style>
-                                <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
                                 <label ng-if="isLoading">
-                                    <div class="loader">Loading...</div>
+
                                 </label>
                                 <button ng-click="doConfirm(post._id)" style="">Confirm</button>
                             </div>
+
                         </div>
+
+                        <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+
                         <!-- end pmpro_user_fields -->
                     </form>
                 </div>

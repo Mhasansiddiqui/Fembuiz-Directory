@@ -56,8 +56,13 @@
                                     </style>
 
                                     <div class="user-choice">
-                                        <button ng-click="doToggle()">Hire Service Worker</button>
-                                        <button ng-click="doToggle()">Jobs Posted</button>
+                                        <div ng-if="!userChoiceHiring">
+                                            <button ng-click="doToggle()">Hire Service Worker</button>
+                                        </div>
+
+                                        <div ng-if="userChoiceHiring">
+                                            <button ng-click="doToggle()">Jobs Posted</button>
+                                        </div>
                                     </div>
 
                                     <div ng-if=userChoiceHiring>
@@ -67,7 +72,7 @@
                                         <hr />
                                         <div class="inline-row" ng-repeat=" user in SHairDresser">
 
-                                            
+
                                             <div class="search-row">
                                                 <div class="card">
                                                     <img class="css-image" src="images/cover1.jpg" alt="John">
@@ -80,7 +85,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button ng-click="toHire(user._id,'HairDresser')"  class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'HairDresser')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -104,7 +109,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button  ng-click="toHire(user._id,'HouseCleaner')" class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'HouseCleaner')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -129,7 +134,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button  ng-click="toHire(user._id,'MealPlanningExpert')"  class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'MealPlanningExpert')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -153,7 +158,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button ng-click="toHire(user._id,'MealPlanningExpert')"   class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'MealPlanningExpert')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -254,7 +259,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button  ng-click="toHire(user._id,'NurseCaseWorker')" class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'NurseCaseWorker')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -427,7 +432,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                         <!--    <button class="card-button">Bid</button> --> 
+                                                            <!--    <button class="card-button">Bid</button> -->
                                                         </p>
                                                     </div>
                                                 </div>

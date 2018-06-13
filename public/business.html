@@ -214,19 +214,66 @@
 
                             <div class="inline-row">
 
-               
+
                                 </style>
 
                                 <div class="search-row" ng-repeat="job in jobs">
                                     <div class="card">
                                         <img class="css-image" src="images/cover1.png" alt="John">
                                         <h4 class="p-text-wrap">{{job.business_type}}</h4>
-                                        <span ng-if="job.josStatus == completed">
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked" ></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
+
+
+                                        <span *ng-if="job.josStatus == completed">
+
+                                            <span ng-if="job.noOfStars == 1 ">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                            </span>
+
+
+
+                                            <span ng-if=" job.noOfStars == 2 ">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                            </span>
+
+
+                                            <span ng-if=" job.noOfStars == 3 ">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                            </span>
+
+
+
+
+
+                                            <span ng-if=" job.noOfStars == 4 ">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                            </span>
+
+
+
+                                            <span ng-if="job.noOfStars == 5">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                            </span>
+
                                         </span>
                                         <p>
                                             <button ng-click="jobDetail(job)" class="card-button">{{job.josStatus}}</button>

@@ -40,16 +40,17 @@
 
                                 <div class="pmpro_checkout-field pmpro_checkout-field-password">
                                     <label for="password">Password</label>
-                                    <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value="" />
+                                    <input ng-model="password" id="password" name="password" type="password" class="input pmpro_required" size="30" value=""
+                                    />
                                 </div>
 
                             </div>
                             <style>
-
-                                .pmpro_checkout-fields div{
-                                    margin:auto !important;
+                                .pmpro_checkout-fields div {
+                                    margin: auto !important;
                                 }
-                                .loader-spin{
+
+                                .loader-spin {
                                     text-align: center !important;
                                 }
 
@@ -88,20 +89,21 @@
                                 input:focus {
                                     background-color: rgb(248, 203, 244)
                                 }
-                                .toast-top-full-width {
-									margin-top: 100px;
-									width: 360px;
 
-								}
+                                .toast-top-full-width {
+                                    margin-top: 100px;
+                                    width: 360px;
+
+                                }
                             </style>
 
-<toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+                            <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
 
                             <div style="margin:20px">
                                 <button ng-click="doLogin()">
                                     <label> Login </label>
                                 </button>
-                                <button  ui-sref="membership-account-levels"  class="signUp">
+                                <button ui-sref="membership-account-levels" class="signUp">
                                     <label> Sigin up </label>
                                 </button>
 

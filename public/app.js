@@ -116,7 +116,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
                 $scope.doConfirm = function (_id) {
 
-                    $scope.isLoading = true;                   
+                    $scope.isLoading = true;
                     $http({
                         method: 'POST',
                         data: {
@@ -344,7 +344,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
 
                 $scope.doSaveComments = function () {
-
+                    $scope.isLoading  = true;
                     console.log({
                         postid: postid,
                         noOfStars: noOfStars,

@@ -17,7 +17,9 @@ var Post = new mongoose.Schema({
     josStatus: { default: 'just_posted', type: String },
     hireBy: { type: Schema.Types.ObjectId, ref: 'authentication' },
     postedBy: { type: Schema.Types.ObjectId, ref: 'authentication' },
-    userHired : { type: Schema.Types.ObjectId, ref: 'authentication' }
+    userHired: { type: Schema.Types.ObjectId, ref: 'authentication' },
+    noOfStars: { default: '0', type: String },
+    comments: { type: String }
 
 })
 
@@ -96,7 +98,7 @@ export let getToHire = function (_id, b) {
     return deffered.promise;
 }
 
-export let ConfirmHire = function (_id,object) {
+export let ConfirmHire = function (_id, object) {
     let deffered = q.defer();
     postModel.findOneAndUpdate(
         { '_id': object._id },
@@ -106,6 +108,27 @@ export let ConfirmHire = function (_id,object) {
                 josStatus: object.josStatus
             }
         },
+        { new: true },
+        (err, success) => {
+            if (!err) {
+                deffered.resolve({ status: true, data: success });
+            }
+            else {
+                deffered.reject({ status: false, data: err })
+            }
+
+        });
+    return deffered.promise;
+}
+
+
+export let CompleteJob = function (object) {
+    let deffered = q.defer();
+
+    console.log(object.userHired, object.userStatus)
+    postModel.findOneAndUpdate(
+        { '_id': object.postid },
+        { $set: { noOfStars: object.noOfStars, comments: object.comments, josStatus: object.josStatus } },
         { new: true },
         (err, success) => {
             if (!err) {

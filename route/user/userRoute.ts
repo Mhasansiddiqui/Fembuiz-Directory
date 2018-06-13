@@ -2,7 +2,7 @@
 //import { request } from 'https';
 
 import { getUserProfile, resendEmailToken, getServiceProvider, updateUserProfile, updateUser, getSingleUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser, updateOtherInfo, updateUserStatus } from '../../schema/authentication'
-import { savepost, getToHire, getUserPost, getJustPostedJob, ConfirmHire } from '../../schema/post'
+import { savepost, getToHire, getUserPost, getJustPostedJob, ConfirmHire, CompleteJob } from '../../schema/post'
 import { SendingMail } from '../../email-setup/email-function'
 
 import { json } from 'body-parser';
@@ -477,17 +477,9 @@ user.get('/toHire', (req, res) => {
         })
 })
 
-
-
-
 user.post('/ConfirmHire', (req, res) => {
-
     let token = req.get('Authorization');
     req.body.token = token.replace("Bearer", "").replace(/ /g, '');
-
-
-    
-
     updateUserStatus(req.body)
         .then((resolve) => {
             if (resolve.data != null) {
@@ -511,6 +503,21 @@ user.post('/ConfirmHire', (req, res) => {
         }, (error) => {
             res.status(204).json({ message: "Post Not Found" });
         })
+})
 
 
+user.post('/SaveReview', (req, res) => {
+    let token = req.get('Authorization');
+    req.body.token = token.replace("Bearer", "").replace(/ /g, '');
+    CompleteJob(req.body)
+        .then((resolve) => {
+            if (resolve.data != null) {
+                res.status(200).json({ data: { user: resolve.data } });
+            }
+            else {
+                res.status(200).json({ data: { user: 0, message: 'Post Not Saved' } });
+            }
+        }, (error) => {
+            res.status(204).json({ message: "Post Not Found" });
+        })
 })

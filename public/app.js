@@ -287,8 +287,84 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('jobdetail', {
             url: '/jobdetail/load?obj',
             templateUrl: 'complete.html',
-            controller: function ($stateParams) {
-                console.log( JSON.parse($stateParams.obj) )
+            controller: function ($stateParams, $scope, $http) {
+                $scope.user = JSON.parse($stateParams.obj)
+
+                $scope.comments = '';
+                let postid = $scope.user._id;
+                $scope.status = false;
+                let noOfStars = 0;
+                $scope.star = function (i) {
+
+                    if (i == '1') {
+                        $scope.status1 = '1';
+                        noOfStars = 1;
+                    }
+                    if (i == '2') {
+                        $scope.status1 = '1';
+                        $scope.status2 = '2';
+                        noOfStars = 2;
+                    }
+                    if (i == '3') {
+                        $scope.status1 = '1';
+                        $scope.status2 = '2';
+                        $scope.status3 = '3';
+                        noOfStars = 3;
+                    }
+
+                    if (i == '4') {
+                        $scope.status1 = '1';
+                        $scope.status2 = '2';
+                        $scope.status3 = '3';
+                        $scope.status4 = '4';
+                        noOfStars = 4;
+                    }
+
+                    if (i == '5') {
+                        $scope.status1 = '1';
+                        $scope.status2 = '2';
+                        $scope.status3 = '3';
+                        $scope.status4 = '4';
+                        $scope.status5 = '5';
+                        noOfStars = 5;
+                    }
+
+
+
+                }
+
+                $scope.doSaveComments = function () {
+
+                    console.log({
+                        postid: postid,
+                            noOfStars: noOfStars,
+                            comments: $scope.comments,
+                            josStatus : 'completed'
+                    })
+                    $http({
+                        method: 'POST',
+                        data: {
+                            postid: postid,
+                            noOfStars: noOfStars,
+                            comments: $scope.comments,
+                            josStatus : 'completed'
+                        },
+                        url: '/api/SaveReview'
+                    }).then(function successCallback(response) {
+                        $scope.isLoading = false;
+                        console.log(response);
+
+                    }, function errorCallback(response) {
+                        $scope.isLoading = false;
+                        toaster.pop({
+                            type: 'error',
+                            title: 'Error',
+                            body: 'Something went wrong',
+                            bodyOutputType: 'trustedHtml'
+                        });
+                    })
+                }
+
             }
         })
         .state('businessPage', {
@@ -297,7 +373,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             controller: function ($scope, $state, $http, toaster) {
 
                 $scope.jobDetail = function (item) {
-                    $state.go('jobdetail',{ obj : JSON.stringify( item ) })
+                    $state.go('jobdetail', { obj: JSON.stringify(item) })
                 }
                 $scope.data = {
                     business_type: '',

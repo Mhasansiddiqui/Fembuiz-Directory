@@ -15,7 +15,9 @@ var Post = new mongoose.Schema({
     josStatus: { "default": 'just_posted', type: String },
     hireBy: { type: Schema.Types.ObjectId, ref: 'authentication' },
     postedBy: { type: Schema.Types.ObjectId, ref: 'authentication' },
-    userHired: { type: Schema.Types.ObjectId, ref: 'authentication' }
+    userHired: { type: Schema.Types.ObjectId, ref: 'authentication' },
+    noOfStars: { "default": '0', type: String },
+    comments: { type: String }
 });
 var postModel = mongoose.model('post', Post);
 exports.savepost = function (object) {
@@ -81,6 +83,19 @@ exports.ConfirmHire = function (_id, object) {
             josStatus: object.josStatus
         }
     }, { "new": true }, function (err, success) {
+        if (!err) {
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};
+exports.CompleteJob = function (object) {
+    var deffered = q.defer();
+    console.log(object.userHired, object.userStatus);
+    postModel.findOneAndUpdate({ '_id': object.postid }, { $set: { noOfStars: object.noOfStars, comments: object.comments, josStatus: object.josStatus } }, { "new": true }, function (err, success) {
         if (!err) {
             deffered.resolve({ status: true, data: success });
         }

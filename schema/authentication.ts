@@ -30,7 +30,8 @@ var Authentication = new mongoose.Schema({
     membershipLevel: { type: Number },
     country: { type: String },
     zip: { type: String },
-    userStatus: { default: 'not_hired', type: String }
+    userStatus: { default: 'not_hired', type: String },
+
 
 })
 

@@ -214,16 +214,19 @@
 
                             <div class="inline-row">
 
+               
+                                </style>
+
                                 <div class="search-row" ng-repeat="job in jobs">
                                     <div class="card">
                                         <img class="css-image" src="images/cover1.png" alt="John">
                                         <h4 class="p-text-wrap">{{job.business_type}}</h4>
                                         <span ng-if="job.josStatus == completed">
-                                            <span class="fa fa-star "></span>
-                                            <span class="fa fa-star "></span>
-                                            <span class="fa fa-star " ></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked" ></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
                                         </span>
                                         <p>
                                             <button ng-click="jobDetail(job)" class="card-button">{{job.josStatus}}</button>

@@ -27,7 +27,8 @@ var Authentication = new mongoose.Schema({
     phoneNumber: { type: String },
     membershipLevel: { type: Number },
     country: { type: String },
-    zip: { type: String }
+    zip: { type: String },
+    userStatus: { "default": 'not_hired', type: String }
 });
 var authenticationModel = mongoose.model('authentication', Authentication);
 exports.saveAuthentication = function (object) {
@@ -61,7 +62,6 @@ exports.findEmailExist = function (object) {
     authenticationModel
         .findOne({ email: object.email }, function (err, success) {
         if (!err) {
-            console.log(success);
             deffered.resolve({ status: true, data: success });
         }
         else {
@@ -72,11 +72,9 @@ exports.findEmailExist = function (object) {
 };
 exports.findEmailUser = function (object) {
     var deffered = q.defer();
-    console.log(object);
     authenticationModel
         .findOne({ username: object.username }, function (err, success) {
         if (!err) {
-            console.log(success);
             deffered.resolve({ status: true, data: success });
         }
         else {
@@ -93,7 +91,6 @@ exports.ConfirmAuthentication = function (object) {
         _id: object._id
     }, function (err, success) {
         if (!err) {
-            console.log(success);
             deffered.resolve({ status: true, data: success });
         }
         else {
@@ -110,7 +107,6 @@ exports.confirmPassword = function (object) {
         _id: object._id
     }, function (err, success) {
         if (!err) {
-            console.log(success);
             deffered.resolve({ status: true, data: success });
         }
         else {
@@ -183,10 +179,8 @@ exports.updateHashAuthentication = function (object) {
 };
 exports.confirmPasswordReq = function (object, chash) {
     var deffered = q.defer();
-    console.log(object, chash);
     authenticationModel.findOneAndUpdate({ 'email': object.email }, { $set: { resetPassReq: true, chash: chash } }, { "new": true }, function (err, success) {
         if (!err) {
-            console.log(object, success);
             deffered.resolve({ status: true, data: success });
         }
         else {
@@ -274,7 +268,6 @@ exports.getUserProfile = function (object) {
     authenticationModel
         .findOne({ username: object.username }, function (err, success) {
         if (!err) {
-            console.log(success);
             deffered.resolve({ status: true, data: success });
         }
         else {
@@ -288,7 +281,6 @@ exports.getSingleUser = function (object) {
     authenticationModel
         .findOne({ _id: object._id }, function (err, success) {
         if (!err) {
-            console.log(success);
             deffered.resolve({ status: true, data: success });
         }
         else {
@@ -303,7 +295,19 @@ exports.getServiceProvider = function () {
         .find({ roll: 'service_provider' }, {})
         .exec(function (err, success) {
         if (!err) {
-            console.log(success);
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};
+exports.updateUserStatus = function (object) {
+    var deffered = q.defer();
+    console.log(object.userHired, object.userStatus);
+    authenticationModel.findOneAndUpdate({ '_id': object.userHired }, { $set: { userStatus: object.userStatus } }, { "new": true }, function (err, success) {
+        if (!err) {
             deffered.resolve({ status: true, data: success });
         }
         else {

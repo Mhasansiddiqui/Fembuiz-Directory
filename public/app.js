@@ -104,17 +104,39 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             // we'll get to this in a bit       
         })
         .state('hiring', {
-            url: '/hiring/load?obj',
+            url: '/hiring/load?obj&userHired',
             templateUrl: 'Hiring.html',
 
-            controller: function ($scope, $http, $stateParams) {
+            controller: function ($scope, $http, $stateParams, toaster) {
 
                 let ps = JSON.parse($stateParams.obj);
 
-                console.log(ps.data.data.user);
                 $scope.posts = ps.data.data.user;
 
 
+                $scope.doConfirm = function (_id) {
+                    $http({
+                        method: 'POST',
+                        data: {
+                            josStatus: 'in_progress',
+                            _id: _id,
+                            userHired: $stateParams.userHired,
+                            userStatus: 'user_hired'
+                        },
+                        url: '/api/ConfirmHire'
+                    }).then(function successCallback(response) {
+                        $scope.isLoading = false;
+                        console.log(response)
+                    }, function errorCallback(response) {
+                        $scope.isLoading = false;
+                        toaster.pop({
+                            type: 'error',
+                            title: 'Error',
+                            body: 'Something went wrong',
+                            bodyOutputType: 'trustedHtml'
+                        });
+                    })
+                }
             }
         })
         .state('search', {
@@ -131,11 +153,11 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                     $scope.userChoiceHiring = !$scope.userChoiceHiring;
                 }
 
-                $scope.toHire = function (experties) {
+                $scope.toHire = function (userid, experties) {
 
                     $http.get("/api/toHire?exprty=" + experties)
                         .then(function (response) {
-                            $state.go('hiring', { obj: JSON.stringify(response) });
+                            $state.go('hiring', { obj: JSON.stringify(response), userHired: userid });
                         })
                 }
 
@@ -262,12 +284,21 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
             }  // we'll get to this in a bit       
         })
+        .state('jobdetail', {
+            url: '/jobdetail/load?obj',
+            templateUrl: 'complete.html',
+            controller: function ($stateParams) {
+                console.log( JSON.parse($stateParams.obj) )
+            }
+        })
         .state('businessPage', {
             url: '/business',
             templateUrl: 'business.html',
-            controller: function ($scope, $http, toaster) {
+            controller: function ($scope, $state, $http, toaster) {
 
-
+                $scope.jobDetail = function (item) {
+                    $state.go('jobdetail',{ obj : JSON.stringify( item ) })
+                }
                 $scope.data = {
                     business_type: '',
                     state: '',

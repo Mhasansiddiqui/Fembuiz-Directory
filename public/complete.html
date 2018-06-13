@@ -1,0 +1,184 @@
+<div class="content content_top_margin">
+    <div class="content_inner  ">
+        <div class="container">
+            <div class="container_inner default_template_holder clearfix page_container_inner">
+                <div id="pmpro_level-2">
+
+
+                    <form style="margin:10px 10px 10px 10px;border:solid 2px rgb(230, 172, 182);padding:10px 10px 10px 10px" id="pmpro_form"
+                        class="pmpro_form" action="" method="post">
+
+                        <input type="hidden" id="level" name="level" value="2" />
+                        <input type="hidden" id="checkjavascript" name="checkjavascript" value="1" />
+
+                        <div id="pmpro_message" class="pmpro_message" style="display: none;"></div>
+
+                        <div id="pmpro_pricing_fields" class="pmpro_checkout">
+                            <!-- end pmpro_checkout-fields -->
+                        </div>
+                        <!-- end pmpro_pricing_fields -->
+
+
+
+                        <div id="pmpro_user_fields" class="pmpro_checkout">
+
+                            <div class="pmpro_checkout-fields">
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <div style="display:inline">
+                                        <label style="display:inline" for="bemail">User Name</label>
+                                        <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{user.username}} </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                    <div style="display:inline">
+                                        <label style="display:inline" for="bemail">Email</label>
+                                        <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{user.email}} </label>
+                                    </div>
+                                </div>
+
+ 
+
+
+
+                                <div ng-if="moreDetail">
+
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-username">
+                                        <label>Expertise</label>
+                                        <select ng-model="data.business_type">
+                                            <option value="HairDresser">Hair Dresser</option>
+                                            <option value="HouseCleaner">House Cleaner</option>
+                                            <option value="Housesitter">Housesitter</option>
+                                            <option value="IndependentTourGuide">Independent Tour Guide</option>
+                                            <option value="MassageTherapist">Massage Therapist</option>
+                                            <option value="MealPlanningExpert">Meal Planning Expert</option>
+                                            <option value="MusicInstructor">Music Instructor</option>
+                                            <option value="NurseCaseWorker">Nurse Case Worker</option>
+
+
+                                        </select>
+                                    </div>
+                                    <!-- end pmpro_checkout-field-username -->
+
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-password">
+                                        <label for="state">State/Province</label>
+                                        <input ng-model="data.state" id="state" name="state" type="text" class="input pmpro_required" size="30" value="" />
+                                    </div>
+                                    <!-- end pmpro_checkout-field-password -->
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-password2">
+                                        <label for="zip">Zip</label>
+                                        <input id="zip" ng-model="data.zip" name="zip" type="text" class="input pmpro_required" size="30" value="" />
+                                    </div>
+                                    <!-- end pmpro_checkout-field-password2 -->
+
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                        <label for="country">Country</label>
+                                        <input ng-model="data.country" id="country" name="country" type="text" class="input pmpro_required" size="30" value="" />
+                                    </div>
+                                    <!-- end pmpro_checkout-field-bemail -->
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-bconfirmemail">
+                                        <label for="phone">PHONE</label>
+                                        <input id="phone" ng-model="data.phoneNumber" name="phone" type="text" class="input pmpro_required" size="30" value="" />
+                                    </div>
+                                    <!-- end pmpro_checkout-field-bconfirmemail -->
+
+
+                                    <div class="pmpro_checkout-field pmpro_captcha">
+                                    </div>
+                                    <!-- end pmpro_captcha -->
+
+                                    <style>
+                                        button:hover {
+                                            box-shadow: 1px 1px #979797
+                                        }
+
+                                        button {
+                                            color: rgb(255, 255, 255);
+                                            background-color: rgb(253, 57, 74);
+                                            width: 80px;
+                                            height: 40px;
+                                            border-color: rgba(201, 25, 25, 0.479)
+                                        }
+
+                                        input {
+                                            border-radius: 30px;
+                                            width: 400px;
+                                            height: 20px;
+
+                                        }
+
+                                        input:active,
+                                        input:focus {
+                                            background-color: rgba(83, 189, 83, 0.493)
+                                        }
+
+                                        .toast-top-full-width {
+                                            top: 100px;
+                                            width: 360px;
+
+                                        }
+                                    </style>
+
+                                    <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+                                    <label ng-if="isLoading">
+                                        <div class="loader">Loading...</div>
+                                    </label>
+
+                                    <button ng-click="doSaveAccount()" style="">Save Account</button>
+                                </div>
+
+                                <div ng-if="!moreDetail">
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                        <div style="display:inline">
+                                            <label style="display:inline" for="bemail">Expertise</label>
+                                            <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{user.business_type}} </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                        <div style="display:inline">
+                                            <label style="display:inline" for="bemail">State</label>
+                                            <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{user.state}} </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                        <div style="display:inline">
+                                            <label style="display:inline" for="bemail">Zip</label>
+                                            <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{user.zip}} </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                        <div style="display:inline">
+                                            <label style="display:inline" for="bemail">Country</label>
+                                            <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{user.country}} </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="pmpro_checkout-field pmpro_checkout-field-bemail">
+                                        <div style="display:inline">
+                                            <label style="display:inline" for="bemail">Phone</label>
+                                            <label style="display:inline;color:rgb(3, 7, 3)" for="bemail">&nbsp&nbsp&nbsp {{user.phoneNumber}} </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- end pmpro_checkout-fields -->
+                            </div>
+                            <!-- end pmpro_user_fields -->
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

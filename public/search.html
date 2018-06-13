@@ -66,6 +66,8 @@
                                         </label>
                                         <hr />
                                         <div class="inline-row" ng-repeat=" user in SHairDresser">
+
+                                            
                                             <div class="search-row">
                                                 <div class="card">
                                                     <img class="css-image" src="images/cover1.jpg" alt="John">
@@ -78,7 +80,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button ng-click="toHire('HairDresser')"  class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'HairDresser')"  class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -102,7 +104,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button  ng-click="toHire('HouseCleaner')" class="card-button">Hire</button>
+                                                        <button  ng-click="toHire(user._id,'HouseCleaner')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -114,6 +116,7 @@
                                         </label>
                                         <hr />
                                         <div class="inline-row" ng-repeat=" user in SMealPlanningExpert">
+
                                             <div class="search-row">
                                                 <div class="card">
                                                     <img class="css-image" src="images/cover1.jpg" alt="John">
@@ -126,7 +129,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button  ng-click="toHire('MealPlanningExpert')"  class="card-button">Hire</button>
+                                                        <button  ng-click="toHire(user._id,'MealPlanningExpert')"  class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -150,7 +153,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button ng-click="toHire('MealPlanningExpert')"   class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'MealPlanningExpert')"   class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -175,7 +178,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button ng-click="toHire('IndependentTourGuide')" class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'IndependentTourGuide')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -200,7 +203,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button ng-click="toHire('MassageTherapist')" class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'MassageTherapist')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -225,7 +228,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button ng-click="toHire('MusicInstructor')" class="card-button">Hire</button>
+                                                        <button ng-click="toHire(user._id,'MusicInstructor')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -251,7 +254,7 @@
                                                         <span class="fa fa-star"></span>
                                                     </span>
                                                     <p>
-                                                        <button  ng-click="toHire('NurseCaseWorker')" class="card-button">Hire</button>
+                                                        <button  ng-click="toHire(user._id,'NurseCaseWorker')" class="card-button">Hire</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -273,7 +276,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                            <button class="card-button">Bid</button>
+                                                            <!-- <button class="card-button">Bid</button> -->
                                                         </p>
                                                     </div>
                                                 </div>
@@ -293,7 +296,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                            <button class="card-button">Bid</button>
+                                                            <!-- <button class="card-button">Bid</button> -->
                                                         </p>
                                                     </div>
                                                 </div>
@@ -315,7 +318,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                            <button class="card-button">Bid</button>
+                                                            <!-- <button class="card-button">Bid</button> -->
                                                         </p>
                                                     </div>
                                                 </div>
@@ -337,7 +340,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                            <button class="card-button">Bid</button>
+                                                            <!-- <button class="card-button">Bid</button> -->
                                                         </p>
                                                     </div>
                                                 </div>
@@ -361,7 +364,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                            <button class="card-button">Bid</button>
+                                                            <!-- <button class="card-button">Bid</button> -->
                                                         </p>
                                                     </div>
                                                 </div>
@@ -382,7 +385,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                            <button class="card-button">Bid</button>
+                                                            <!-- <button class="card-button">Bid</button> -->
                                                         </p>
                                                     </div>
                                                 </div>
@@ -403,7 +406,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                            <button class="card-button">Bid</button>
+                                                            <!-- <button class="card-button">Bid</button> -->
                                                         </p>
                                                     </div>
                                                 </div>
@@ -424,7 +427,7 @@
                                                         <h4>{{job.postedBy.username}}</h4>
                                                         <p class="p-text-wrap">{{job.jobDescription}}</p>
                                                         <p>
-                                                            <button class="card-button">Bid</button>
+                                                         <!--    <button class="card-button">Bid</button> --> 
                                                         </p>
                                                     </div>
                                                 </div>

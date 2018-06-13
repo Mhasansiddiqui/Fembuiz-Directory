@@ -15,7 +15,9 @@ var Post = new mongoose.Schema({
     duration: { type: String },
     jobDescription: { type: String },
     josStatus: { default: 'just_posted', type: String },
-    postedBy: { type: Schema.Types.ObjectId, ref: 'authentication' }
+    hireBy: { type: Schema.Types.ObjectId, ref: 'authentication' },
+    postedBy: { type: Schema.Types.ObjectId, ref: 'authentication' },
+    userHired : { type: Schema.Types.ObjectId, ref: 'authentication' }
 
 })
 
@@ -45,7 +47,6 @@ export let getUserPost = function (_id) {
         .find({ postedBy: _id }, {}, (err, success) => {
 
             if (!err) {
-                console.log(success)
                 deffered.resolve({ status: true, data: success });
             }
             else {
@@ -69,7 +70,6 @@ export let getJustPostedJob = function () {
         .exec((err, success) => {
 
             if (!err) {
-                console.log(success)
                 deffered.resolve({ status: true, data: success });
             }
             else {
@@ -80,22 +80,41 @@ export let getJustPostedJob = function () {
     return deffered.promise;
 }
 
-export let getToHire = function (_id,b) {
-
+export let getToHire = function (_id, b) {
     let deffered = q.defer();
-
     postModel
-        .find({postedBy: _id , business_type : b })
-        .exec((err, success) => { 
+        .find({ postedBy: _id, business_type: b })
+        .exec((err, success) => {
 
             if (!err) {
-                console.log(success)
                 deffered.resolve({ status: true, data: success });
             }
             else {
                 deffered.reject({ status: false, data: err })
             }
         })
+    return deffered.promise;
+}
 
+export let ConfirmHire = function (_id,object) {
+    let deffered = q.defer();
+    postModel.findOneAndUpdate(
+        { '_id': object._id },
+        {
+            $set: {
+                hireBy: _id,
+                josStatus: object.josStatus
+            }
+        },
+        { new: true },
+        (err, success) => {
+            if (!err) {
+                deffered.resolve({ status: true, data: success });
+            }
+            else {
+                deffered.reject({ status: false, data: err })
+            }
+
+        });
     return deffered.promise;
 }

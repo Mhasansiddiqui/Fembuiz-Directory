@@ -1,0 +1,160 @@
+<div class="content content_top_margin">
+    <div class="content_inner  ">
+        <div class="container">
+            <div class="container_inner default_template_holder clearfix page_container_inner">
+                <div id="pmpro_level-2">
+                    <style>
+                        .p-text-wrap {
+                            margin: 0;
+                            padding: 0 !important;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                        }
+
+                        .user-choice {
+                            margin: 10px;
+                            text-align: end;
+                        }
+
+                        .user-choice button {
+                            height: 30px;
+                            background-color: cadetblue;
+                            border-color: rgb(42, 147, 153)
+                        }
+
+                        .user-choice button:focus {
+                            background-color: rgb(51, 187, 51);
+                            border-color: rgb(40, 143, 40)
+                        }
+
+                        .inline-row {
+                            display: inline-flex
+                        }
+
+                        .search-row {
+
+                            width: 140px;
+                            height: 200px;
+                            background-color: aliceblue;
+                            text-align: center;
+                        }
+
+                        .css-image {
+                            height: 80px;
+                            width: 80px;
+                            border-radius: 50%
+                        }
+
+                        .checked {
+                            color: orange;
+                        }
+                    </style>
+
+
+                    <form style="margin:10px 10px 10px 10px;border:solid 2px rgb(230, 172, 182);padding:10px 10px 10px 10px" id="pmpro_form"
+                        class="pmpro_form" action="" method="post">
+
+
+
+
+                        <input type="hidden" id="level" name="level" value="2" />
+                        <input type="hidden" id="checkjavascript" name="checkjavascript" value="1" />
+
+                        <div id="pmpro_message" class="pmpro_message" style="display: none;"></div>
+
+                        <div id="pmpro_pricing_fields" class="pmpro_checkout">
+                            <!-- end pmpro_checkout-fields -->
+                        </div>
+                        <!-- end pmpro_pricing_fields -->
+                        <div class="user-choice">
+                            <button ng-click="toHire()">Hire</button>
+
+                        </div>
+
+                        <div>
+                            <label for="">
+                                Jobs by {{username}}
+                            </label>
+                            <hr />
+
+                            <div class="inline-row">
+
+
+                                </style>
+
+                                <div class="search-row" ng-repeat="job in jobs">
+                                    <div class="card">
+                                        <img class="css-image" src="images/cover1.png" alt="John">
+                                        <h4 class="p-text-wrap">{{job.business_type}}</h4>
+
+
+                                        <span *ng-if="job.josStatus == completed">
+
+                                            <span ng-if="job.noOfStars == 1 ">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                            </span>
+
+
+
+                                            <span ng-if=" job.noOfStars == 2 ">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                            </span>
+
+
+                                            <span ng-if=" job.noOfStars == 3 ">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                            </span>
+
+
+
+
+
+                                            <span ng-if=" job.noOfStars == 4 ">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star "></span>
+                                            </span>
+
+
+
+                                            <span ng-if="job.noOfStars == 5">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                            </span>
+
+                                        </span>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <hr />
+
+                        </div>
+                        <!-- end pmpro_user_fields -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

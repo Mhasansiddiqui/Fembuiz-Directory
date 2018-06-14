@@ -142,27 +142,60 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
             }
         })
+        .state('profile', {
+            url: '/profile/load?id&username&exprty',
+            templateUrl: 'profile.html',
+            controller: function ($stateParams, $scope, $http, $state) {
+
+                $scope.toHire = function (userid, experties) {
+                    
+                    $http.get("/api/toHire?exprty=" + $stateParams.exprty)
+                        .then(function (response) {
+
+                            console.log(response)
+
+                            $state.go('hiring', { obj: JSON.stringify(response), userHired: userid });
+                        })
+                }
+
+                $http({
+                    method: 'POST',
+                    data: {
+                        userid: $stateParams.id
+                    },
+                    url: '/api/profile'
+                }).then(function successCallback(response) {
+                    $scope.jobs = response.data.data.user;
+
+
+                    $scope.username = $stateParams.username
+                }, function errorCallback(response) {
+                    console.log(response)
+                })
+            }
+        })
         .state('search', {
             url: '/search',
             templateUrl: 'search.html',
             controller: function ($scope, $http, $state) {
+
 
                 var business_type = ["HairDresser", "HouseCleaner", "Housesitter", "IndependentTourGuide"
                     , "MassageTherapist", "MealPlanningExpert", "MusicInstructor", "NurseCaseWorker"];
 
                 $scope.userChoiceHiring = true;
 
+
+
+                $scope.viewProfile = function (id, user , exprty) {
+                    $state.go('profile', { id: id, username: user , exprty })
+                }
+
+
                 $scope.doToggle = function () {
                     $scope.userChoiceHiring = !$scope.userChoiceHiring;
                 }
 
-                $scope.toHire = function (userid, experties) {
-
-                    $http.get("/api/toHire?exprty=" + experties)
-                        .then(function (response) {
-                            $state.go('hiring', { obj: JSON.stringify(response), userHired: userid });
-                        })
-                }
 
                 $http.get("/api/getServiceProvider")
                     .then(function (response) {
@@ -294,6 +327,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 $state.go('home')
             }
         })
+
         .state('jobdetail', {
             url: '/jobdetail/load?obj',
             templateUrl: 'complete.html',
@@ -344,7 +378,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
 
                 $scope.doSaveComments = function () {
-                    $scope.isLoading  = true;
+                    $scope.isLoading = true;
                     console.log({
                         postid: postid,
                         noOfStars: noOfStars,

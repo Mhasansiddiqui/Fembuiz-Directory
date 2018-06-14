@@ -412,3 +412,18 @@ exports.user.post('/SaveReview', function (req, res) {
         res.status(204).json({ message: "Post Not Found" });
     });
 });
+exports.user.post('/profile', function (req, res) {
+    var token = req.get('Authorization');
+    req.body.token = token.replace("Bearer", "").replace(/ /g, '');
+    post_1.WorkerProfile(req.body)
+        .then(function (resolve) {
+        if (resolve.data != null) {
+            res.status(200).json({ data: { user: resolve.data } });
+        }
+        else {
+            res.status(200).json({ data: { user: 0, message: 'Post Not Saved' } });
+        }
+    }, function (error) {
+        res.status(204).json({ message: "Post Not Found" });
+    });
+});

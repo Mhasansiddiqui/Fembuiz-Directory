@@ -80,7 +80,8 @@ exports.ConfirmHire = function (_id, object) {
     postModel.findOneAndUpdate({ '_id': object._id }, {
         $set: {
             hireBy: _id,
-            josStatus: object.josStatus
+            josStatus: object.josStatus,
+            userHired: object.userHired
         }
     }, { "new": true }, function (err, success) {
         if (!err) {
@@ -96,6 +97,18 @@ exports.CompleteJob = function (object) {
     var deffered = q.defer();
     console.log(object.userHired, object.userStatus);
     postModel.findOneAndUpdate({ '_id': object.postid }, { $set: { noOfStars: object.noOfStars, comments: object.comments, josStatus: object.josStatus } }, { "new": true }, function (err, success) {
+        if (!err) {
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};
+exports.WorkerProfile = function (object) {
+    var deffered = q.defer();
+    postModel.find({ 'userHired': object.id }, {}, function (err, success) {
         if (!err) {
             deffered.resolve({ status: true, data: success });
         }

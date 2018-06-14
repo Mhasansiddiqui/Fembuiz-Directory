@@ -105,7 +105,8 @@ export let ConfirmHire = function (_id, object) {
         {
             $set: {
                 hireBy: _id,
-                josStatus: object.josStatus
+                josStatus: object.josStatus,
+                userHired : object.userHired
             }
         },
         { new: true },
@@ -141,3 +142,24 @@ export let CompleteJob = function (object) {
         });
     return deffered.promise;
 }
+
+
+export let WorkerProfile = function (object) {
+    let deffered = q.defer();
+
+    postModel.find(
+        { 'userHired': object.id }
+        , {},
+        (err, success) => {
+            if (!err) {
+                deffered.resolve({ status: true, data: success });
+            }
+            else {
+                deffered.reject({ status: false, data: err })
+            }
+
+        });
+    return deffered.promise;
+}
+
+

@@ -147,6 +147,18 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             templateUrl: 'profile.html',
             controller: function ($stateParams, $scope, $http, $state) {
 
+                 console.log('i am in profile controller')
+
+
+                $http.get("/api/getUserData?id=" + $stateParams.id)
+                    .then(function (response) {
+                        $scope.user = response.data.data.user;
+                        console.log($scope.user)
+                      //  $state.go('hiring', { obj: JSON.stringify(response), userHired: userid });
+                    })
+
+
+
                 $scope.toHire = function (userid, experties) {
                     
                     $http.get("/api/toHire?exprty=" + $stateParams.exprty)
@@ -167,7 +179,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }).then(function successCallback(response) {
                     $scope.jobs = response.data.data.user;
 
-
+                    console.log(response)
                     $scope.username = $stateParams.username
                 }, function errorCallback(response) {
                     console.log(response)
@@ -187,8 +199,8 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
 
 
-                $scope.viewProfile = function (id, user , exprty) {
-                    $state.go('profile', { id: id, username: user , exprty })
+                $scope.viewProfile = function (id, user, exprty) {
+                    $state.go('profile', { id: id, username: user, exprty })
                 }
 
 

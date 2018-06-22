@@ -316,3 +316,16 @@ exports.updateUserStatus = function (object) {
     });
     return deffered.promise;
 };
+exports.getHiringUser = function (userid) {
+    var deffered = q.defer();
+    authenticationModel
+        .findOne({ _id: userid }, function (err, success) {
+        if (!err) {
+            deffered.resolve({ status: true, data: success });
+        }
+        else {
+            deffered.reject({ status: false, data: err });
+        }
+    });
+    return deffered.promise;
+};

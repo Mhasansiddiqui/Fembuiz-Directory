@@ -1,7 +1,7 @@
 
 //import { request } from 'https';
 
-import { getUserProfile, resendEmailToken, getServiceProvider, updateUserProfile, updateUser, getSingleUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser, updateOtherInfo, updateUserStatus } from '../../schema/authentication'
+import { getUserProfile, resendEmailToken, getServiceProvider, updateUserProfile, updateUser, getSingleUser, userDelete, confirmPassword, confirmPasswordReq, findEmailExist, ConfirmAuthentication, updateHashAuthentication, saveAuthentication, findAuthentication, findAllUsers, updateTokenAuthentication, findUser, userActiveStatus, findEmailUser, updateOtherInfo, updateUserStatus, getHiringUser } from '../../schema/authentication'
 import { savepost, getToHire, getUserPost, getJustPostedJob, ConfirmHire, CompleteJob, WorkerProfile } from '../../schema/post'
 import { SendingMail } from '../../email-setup/email-function'
 
@@ -403,6 +403,7 @@ user.get('/UserPost', (req, res) => {
     req.body.token = token.replace("Bearer", "").replace(/ /g, '');
 
     getUserPost(req.query._id)
+
         .then((resolve) => {
             if (resolve.data != null) {
                 res.status(200).json({ data: { user: resolve.data } });
@@ -538,3 +539,35 @@ user.post('/profile', (req, res) => {
             res.status(204).json({ message: "Post Not Found" });
         })
 })
+
+
+
+
+user.get('/getUserData', (req, res) => {
+
+
+    let q = req.query.id;
+
+    let b = q.indexOf('=');
+    let _id = q.substring(b + 1, q.length);
+
+    let c = q.indexOf('?');
+    let userid = q.substring(0, c)
+
+    console.log(userid ,_id)
+
+    getHiringUser(userid)
+    .then((resolve) => {
+        if (resolve.data != null) {
+            res.status(200).json({ data: { user: resolve.data } });
+        }
+        else {
+            res.status(200).json({ data: { user: 0, message: 'User Not Saved' } });
+        }
+    }, (error) => {
+        res.status(204).json({ message: "User Not Found" });
+    })
+  
+ 
+ })
+ 

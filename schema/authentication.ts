@@ -463,3 +463,21 @@ export let updateUserStatus = function (object) {
         });
     return deffered.promise;
 }
+
+export let getHiringUser = function (userid ) {
+
+    let deffered = q.defer();
+
+    authenticationModel
+        .findOne({_id : userid }, (err, success) => {
+
+            if (!err) {
+                deffered.resolve({ status: true, data: success });
+            }
+            else {
+                deffered.reject({ status: false, data: err })
+            }
+
+        });
+    return deffered.promise;
+}

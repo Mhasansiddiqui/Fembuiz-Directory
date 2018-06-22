@@ -427,3 +427,22 @@ exports.user.post('/profile', function (req, res) {
         res.status(204).json({ message: "Post Not Found" });
     });
 });
+exports.user.get('/getUserData', function (req, res) {
+    var q = req.query.id;
+    var b = q.indexOf('=');
+    var _id = q.substring(b + 1, q.length);
+    var c = q.indexOf('?');
+    var userid = q.substring(0, c);
+    console.log(userid, _id);
+    authentication_1.getHiringUser(userid)
+        .then(function (resolve) {
+        if (resolve.data != null) {
+            res.status(200).json({ data: { user: resolve.data } });
+        }
+        else {
+            res.status(200).json({ data: { user: 0, message: 'User Not Saved' } });
+        }
+    }, function (error) {
+        res.status(204).json({ message: "User Not Found" });
+    });
+});
